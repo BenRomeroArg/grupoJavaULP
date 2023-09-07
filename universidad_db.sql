@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2023 a las 15:53:32
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 07-09-2023 a las 18:27:15
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,26 @@ CREATE TABLE `alumno` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `alumno`
+--
+
+INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaDeNacimiento`, `estado`) VALUES
+(1, 45216153, 'ADRIEL MATIAS', 'BAEZ', '2001-07-02', 1),
+(2, 46044070, 'GENARO', 'CAMILLETTI', '2000-10-25', 1),
+(3, 46495934, 'TOMÁS SANTIAGO', 'CLEMENTELLI', '2001-08-17', 1),
+(4, 46368627, 'MAXIMILIANO EZEQUIEL', 'CORTI', '2002-04-13', 1),
+(5, 46241320, 'GENARO', 'GALAN', '2001-09-16', 1),
+(6, 46114013, 'MIGUEL ANGEL', 'GARCIA', '2001-05-01', 1),
+(7, 45951359, 'FRANCO', 'GATTI', '2000-10-19', 1),
+(8, 46445924, 'NICOLÁS ROBERTO', 'LEZCANO', '2001-03-28', 1),
+(9, 45504125, 'LAUREANO', 'MARZETTI', '2000-11-19', 1),
+(10, 45048655, 'IAN ANGEL VALENTÍN', 'MOLINA', '2000-12-27', 1),
+(11, 44593185, 'MAXIMO', 'PALACIOS ', '2001-09-18', 1),
+(12, 46761574, 'FEDERICO', 'TADDEI', '2000-10-25', 1),
+(13, 46164852, 'MATÍAS EZEQUIEL', 'VITELLI', '2001-12-30', 1),
+(14, 45827090, 'NEHEMIAS LEONEL', 'ZARZA', '2000-11-15', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +83,33 @@ CREATE TABLE `materia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`idMateria`, `nombre`, `año`, `estado`) VALUES
+(4, 'Teoría de los Circuitos', 1, 1),
+(5, 'Técnicas Digitales', 1, 1),
+(6, 'Electrónica I', 1, 1),
+(7, 'Lógica Simbólica', 1, 1),
+(8, 'Laboratorio I', 1, 1),
+(9, 'Teología ', 1, 1),
+(10, 'Máquinas Eléctricas ', 2, 1),
+(11, 'Circuitos Hidráulicos y Neumáticos', 2, 1),
+(12, 'Matemáticas Aplicadas', 2, 1),
+(13, 'Electrónica II', 2, 1),
+(14, 'Laboratorio II ', 2, 1),
+(15, 'Resistencia y Cálculo de Elementos de Máquina', 2, 1),
+(16, 'Microprocesadores I', 2, 1),
+(17, 'Epistemología de la Ciencia', 2, 1),
+(18, 'Computación Aplicada', 3, 1),
+(19, 'Sistemas de Control', 3, 1),
+(20, 'Microprocesadores II', 3, 1),
+(21, 'Tecnología y Aplicación de los Robots', 3, 1),
+(22, 'Sensores y Servomecanismos', 3, 1),
+(23, 'Laboratorio III', 3, 1),
+(24, 'Etica y Moral Profesional', 3, 1);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -85,7 +132,8 @@ ALTER TABLE `inscripcion`
 -- Indices de la tabla `materia`
 --
 ALTER TABLE `materia`
-  ADD PRIMARY KEY (`idMateria`);
+  ADD PRIMARY KEY (`idMateria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -95,7 +143,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
@@ -107,7 +155,7 @@ ALTER TABLE `inscripcion`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
