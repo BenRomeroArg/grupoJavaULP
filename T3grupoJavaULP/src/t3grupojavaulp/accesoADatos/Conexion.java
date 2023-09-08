@@ -9,21 +9,20 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private String url, bd, usuario, pass, driver;
-    private Connection cx;
+    private static final String URL = "jdbc:mariadb://localhost:3306/";
+    private static final String USUARIO = "root";
+    private static final String PASS = "";
+    private static final String DRIVER = "org.mariadb.jdbc.Driver";
+    private static final String DB = "universidad_db";
+    
+    private static Connection cx;
 
-    public Conexion(String bd) {
-        this.bd = bd;
-        url = "jdbc:mariadb://localhost:3306/";
-        usuario = "root";
-        pass = "";
-        driver = "org.mariadb.jdbc.Driver";
-    }
+    public Conexion(String bd) {}
 
-    public Connection conectar() {
+    public static Connection conectar() {
         try {
-            Class.forName(driver);
-            cx = DriverManager.getConnection(url + bd, usuario, pass);
+            Class.forName(DRIVER);
+            cx = DriverManager.getConnection(URL + DB, USUARIO, PASS);
 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar el Driver " + ex.getMessage());
