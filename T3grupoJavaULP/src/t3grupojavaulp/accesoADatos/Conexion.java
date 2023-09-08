@@ -1,4 +1,4 @@
-package t3grupojavaulp.Conexion;
+package t3grupojavaulp.accesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
