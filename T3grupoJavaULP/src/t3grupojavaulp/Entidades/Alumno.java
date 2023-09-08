@@ -83,6 +83,14 @@ public class Alumno {
     public boolean isEstado() {
         return estado;
     }
+    
+    public int getEstadoAsInt() {
+        if (estado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
     public void setEstado(boolean estado) {
         this.estado = estado;
