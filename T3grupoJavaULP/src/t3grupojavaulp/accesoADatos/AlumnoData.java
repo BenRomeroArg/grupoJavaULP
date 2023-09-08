@@ -8,14 +8,14 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import t3grupojavaulp.Entidades.Alumno;
 
-
 public class AlumnoData {
+
     private Connection con;
 
     public AlumnoData() {
         con = Conexion.conectar();
     }
-    
+
     public void guardarAlumno(Alumno alumno) {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO `alumno`( `dni`, `apellido`, `nombre`, `fechaDeNacimiento`, `estado`) VALUES (?,?,?,?,?)",
@@ -32,8 +32,38 @@ public class AlumnoData {
                 JOptionPane.showMessageDialog(null, "El alumno se añadio con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             }
             ps.close();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error al acceder a la tabla", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public Alumno buscarAlumno(int id) {
+        Alumno alumno = null;
+        String sql = "SELECT dni, apellido, nombre, fechaDeNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                alumno = new Alumno();
+                alumno.setIdAlumno(id);
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNacimiento(rs.getDate("fechaDeNacimiento"));
+                alumno.setEstado(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return alumno;
+    }
+
 }
