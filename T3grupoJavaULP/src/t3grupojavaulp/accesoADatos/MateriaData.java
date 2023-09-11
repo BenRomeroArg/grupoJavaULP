@@ -39,7 +39,29 @@ public class MateriaData {
     }
     
     public Materia buscarMateria(int id) {
-        // TODO
+        Materia materia = null;
+        String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            
+            // Ejecutamos el query
+            ResultSet rs = ps.executeQuery();
+            
+            // Si hay resultado lo agregamos a un objeto Materia
+            if (rs.next()) {
+                materia = new Materia(rs.getInt("idMateria"), 
+                                    rs.getString("nombre"), 
+                                    rs.getInt("año"), 
+                                    rs.getBoolean("estado"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el alumno", "Sin resultados", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla 'materia'" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            return materia;
+        }
     }
     
     public void modificarMateria(Materia materia) {
