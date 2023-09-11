@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import t3grupojavaulp.Entidades.Materia;
 
@@ -74,5 +75,6 @@ public class MateriaData {
     
     public ArrayList<Materia> listarMaterias() {
         // TODO
+        return null;
     }
 }
