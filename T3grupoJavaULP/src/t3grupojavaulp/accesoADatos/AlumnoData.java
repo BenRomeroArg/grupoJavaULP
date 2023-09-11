@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import t3grupojavaulp.Entidades.Alumno;
+
 
 public class AlumnoData {
 
@@ -107,5 +109,27 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public ArrayList<Alumno> lista() {
+        String sql = "SELECT idAlumno,dni,apellido,nombre FROM alumno WHERE estado = 1";
+        ArrayList<Alumno> alList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+               Alumno al = new Alumno();
+                al.setIdAlumno(res.getInt("idAlumno"));
+                al.setDni(res.getInt("dni"));
+                al.setApellido(res.getString("apellido"));
+                al.setNombre(res.getString("nombre"));
+                alList.add(al);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");
+        }
+        return alList;
     }
 }
