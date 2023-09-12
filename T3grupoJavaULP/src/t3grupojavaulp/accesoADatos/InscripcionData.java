@@ -44,22 +44,6 @@ public class InscripcionData {
         
     }
 
-    public void eliminarMateria(int id) {
-        try {
-            String sql="UPDATE materia SET estado=0 WHERE idMateria=?";
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int fila=ps.executeUpdate();
-            
-            if(fila==1){
-                JOptionPane.showMessageDialog(null, "Se eliminó la materia");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla 'Materia'");
-        }
-    }
-
     public ArrayList<Inscripcion> obtenerInscripciones() {
         // TODO
         return null;
