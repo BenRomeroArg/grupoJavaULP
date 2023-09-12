@@ -1,6 +1,7 @@
 package t3grupojavaulp.accesoADatos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -133,8 +134,25 @@ public class AlumnoData {
         return alList;
     }
     
-    public Alumno modificarAlumno(Alumno alumno) {
-        // TODO
-        return null;
+    public void modificarAlumno(Alumno alumno) {
+        String sql="UPDATE alumno SET dni=?, apellido=?, nombre=?, fechaDeNacimiento=? WHERE idAlumno=?";
+        PreparedStatement ps=null;
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setDate(4, alumno.getFechaNacimiento());
+            ps.setInt(5, alumno.getIdAlumno());
+            
+            int exito=ps.executeUpdate();
+            if(exito==1){
+                JOptionPane.showMessageDialog(null, "Ha modificado al alumno exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "El alumno no existe");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno"+e.getMessage());
+        }
     }
 }

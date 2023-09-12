@@ -45,7 +45,7 @@ public class InscripcionData {
     }
 
     public void eliminarMateria(int id) {
-        // TODO
+        
     }
 
     public ArrayList<Inscripcion> obtenerInscripciones() {

@@ -1,14 +1,25 @@
 
 package t3grupojavaulp.Vistas;
 
+import javax.swing.table.DefaultTableModel;
+import t3grupojavaulp.accesoADatos.InscripcionData;
+import t3grupojavaulp.accesoADatos.MateriaData;
+
 /**
  *
  * @author Ignacio C.
  */
 public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     
-    public ConsultaAlumnoPorMateriaView() {
+    private DefaultTableModel modelo=new DefaultTableModel(){
+     public boolean isCellEditable(int f, int c){
+         return false; //Todas las celdas no son editables
+        }
+    };
+            
+    public ConsultaAlumnoPorMateriaView(){
         initComponents();
+        armarCabecera();
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +40,12 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Seleccione una materia");
+
+        jcbSeleccionMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSeleccionMateriaActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,6 +101,14 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
+        MateriaData materiaSeleccionada= (MateriaData) jcbSeleccionMateria.getSelectedItem();
+        for(InscripcionData al: UniversidadVista.listaAlumnos){
+            /// Completar para que aparezca en tabla
+        }
+        
+    }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -93,4 +118,18 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbSeleccionMateria;
     // End of variables declaration//GEN-END:variables
+
+     private void armarCabecera(){
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        jTable1.setModel(modelo);
+    }
+    private void borrarFilas(){
+        int f=jTable1.getRowCount()-1;
+        for(; f>=0; f--){
+            modelo.removeRow(f);
+        }
+    }
 }
