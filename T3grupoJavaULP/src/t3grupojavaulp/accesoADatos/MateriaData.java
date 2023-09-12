@@ -17,6 +17,12 @@ public class MateriaData {
         con = Conexion.conectar();
     }
     
+    /**
+     * Guarda un objeto <b>Materia</b> en la base de datos.
+     * 
+     * @param   materia El objeto Materia a guardar.
+     * @see     Materia
+     */
     public void guardarMateria(Materia materia) {
         String sql = "INSERT INTO materia (nombre, año, estado) VALUES (?,?,?)";
         
@@ -39,6 +45,13 @@ public class MateriaData {
         }
     }
     
+    /***
+     * Regresa de la base de datos el objeto <b>Materia</b> correspondiente al id proporcionado.
+     * 
+     * @param   id  id de la materia en la base de datos (<b>idMateria</b>).
+     * @return      el objeto correspondiente al id.
+     * @see         Materia
+     */
     public Materia buscarMateria(int id) {
         Materia materia = null;
         String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1";
@@ -65,6 +78,12 @@ public class MateriaData {
         }
     }
     
+    /***
+     * Guarda los cambios de un objeto <b>Materia</b> ya existente en la base de datos.
+     * 
+     * @param materia el objeto a guardar
+     * @see Materia
+     */
     public void modificarMateria(Materia materia) {
         String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
         
@@ -84,6 +103,11 @@ public class MateriaData {
         }
     }
     
+    /***
+     * Elimina de la base de datos la <b>Materia</b> correspondiente al id proporcionado.
+     * 
+     * @param id correspondiente al <b>idMateria</b> en la base de datos.
+     */
     public void eliminarMateria(int id) {
         String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
         
@@ -98,9 +122,16 @@ public class MateriaData {
         }
     }
     
+    /***
+     * Regresa <b>ArrayList</b> de <b>Materia</b> que se encuentran en la base de datos.
+     * 
+     * @return Lista de objetos <b>Materia</b> en la base de datos.
+     * @see Materia
+     * @see ArrayList
+     */
     public ArrayList<Materia> listarMaterias() {
         ArrayList<Materia> materias = new ArrayList<>();
-        String sql = "SELECT * FROM materias WHERE estado = 1";
+        String sql = "SELECT * FROM materia WHERE estado = 1";
         
         try (ResultSet rs = con.prepareStatement(sql).executeQuery()) {
             while (rs.next()) {
