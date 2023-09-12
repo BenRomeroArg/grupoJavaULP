@@ -131,7 +131,7 @@ public class MateriaData {
      */
     public ArrayList<Materia> listarMaterias() {
         ArrayList<Materia> materias = new ArrayList<>();
-        String sql = "SELECT * FROM materias WHERE estado = 1";
+        String sql = "SELECT * FROM materia WHERE estado = 1";
         
         try (ResultSet rs = con.prepareStatement(sql).executeQuery()) {
             while (rs.next()) {

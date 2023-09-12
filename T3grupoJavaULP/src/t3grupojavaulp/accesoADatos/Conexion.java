@@ -13,7 +13,7 @@ public class Conexion {
     private static final String USUARIO = "root";
     private static final String PASS = "";
     private static final String DRIVER = "org.mariadb.jdbc.Driver";
-    private static final String DB = "universidadulp_bd";
+    private static final String DB = "universidad_db";
     
     private static Connection cx;
 
