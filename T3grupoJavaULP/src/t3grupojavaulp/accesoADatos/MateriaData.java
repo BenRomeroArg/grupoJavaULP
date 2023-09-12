@@ -51,10 +51,10 @@ public class MateriaData {
             
             // Si hay resultado lo agregamos a un objeto Materia
             if (rs.next()) {
-                materia = new Materia(rs.getInt("idMateria"), 
-                                    rs.getString("nombre"), 
-                                    rs.getInt("año"), 
-                                    rs.getBoolean("estado"));
+                materia = new Materia(  rs.getInt("idMateria"), 
+                                        rs.getString("nombre"), 
+                                        rs.getInt("año"), 
+                                        rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno", "Sin resultados", JOptionPane.WARNING_MESSAGE);
             }
@@ -66,15 +66,53 @@ public class MateriaData {
     }
     
     public void modificarMateria(Materia materia) {
-        // TODO
+        String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setBoolean(3, materia.isActivo());
+            ps.setInt(4, materia.getIdMateria());
+            
+            if (ps.executeUpdate() == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "La materia no existe en la base de datos.", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void eliminarMateria(int id) {
-        // TODO
+        String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            
+            if (ps.executeUpdate() == 1) {
+                JOptionPane.showMessageDialog(null, "Se eliminó la materia.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public ArrayList<Materia> listarMaterias() {
-        // TODO
-        return null;
+        ArrayList<Materia> materias = new ArrayList<>();
+        String sql = "SELECT * FROM materias WHERE estado = 1";
+        
+        try (ResultSet rs = con.prepareStatement(sql).executeQuery()) {
+            while (rs.next()) {
+                Materia materia = new Materia(  rs.getInt("idMateria"), 
+                                                rs.getString("nombre"), 
+                                                rs.getInt("año"), 
+                                                rs.getBoolean("estado"));
+                materias.add(materia);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+        }
+        return materias;
     }
 }
