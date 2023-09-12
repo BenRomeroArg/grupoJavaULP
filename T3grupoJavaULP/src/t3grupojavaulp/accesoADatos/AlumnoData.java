@@ -132,4 +132,9 @@ public class AlumnoData {
         }
         return alList;
     }
+    
+    public Alumno modificarAlumno(Alumno alumno) {
+        // TODO
+        return null;
+    }
 }
