@@ -44,22 +44,6 @@ public class InscripcionData {
         
     }
 
-    public void eliminarMateria(int id) {
-        try {
-            String sql="UPDATE materia SET estado=0 WHERE idMateria=?";
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int fila=ps.executeUpdate();
-            
-            if(fila==1){
-                JOptionPane.showMessageDialog(null, "Se eliminó la materia");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla 'Materia'");
-        }
-    }
-
     public ArrayList<Inscripcion> obtenerInscripciones() {
         // TODO
         return null;
@@ -74,7 +58,7 @@ public class InscripcionData {
         ArrayList<Materia> materias= new ArrayList<>();
         try {
             String sql= "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia"
-                      + "WHERE inscripcion.idMAteria= materia.idMateria AND inscripcion.idAlumno=?";
+                      + "WHERE inscripcion.idMateria= materia.idMateria AND inscripcion.idAlumno=?";
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
