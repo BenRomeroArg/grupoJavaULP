@@ -34,7 +34,7 @@ public class Conexion {
 
 //PEGAR EN UN MAIN
 //    public static void main(String[] args) {
-//        Conexion con = new Conexion("universidad_db");
+//        Conexion con = new Conexion("universidadulp_bd");
 //        con.conectar();
 //    }
 }

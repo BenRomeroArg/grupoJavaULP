@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
+
 import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Inscripcion;

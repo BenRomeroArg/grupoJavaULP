@@ -10,7 +10,6 @@ import t3grupojavaulp.accesoADatos.MateriaData;
 
 public class T3grupoJavaULP {
     public static void main(String[] args) {
-        // TODO code application logic here
         Connection con=Conexion.conectar();
         AlumnoData AD=new AlumnoData();
         MateriaData MD = new MateriaData();
