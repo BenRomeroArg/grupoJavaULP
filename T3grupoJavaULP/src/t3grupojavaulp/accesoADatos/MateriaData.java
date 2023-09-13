@@ -69,7 +69,7 @@ public class MateriaData {
                                         rs.getInt("año"), 
                                         rs.getBoolean("estado"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno", "Sin resultados", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No existe la materia con el ID: " + id, "Sin resultados", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla 'materia'" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

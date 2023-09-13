@@ -28,18 +28,18 @@ public class T3grupoJavaULP {
 //        }
 
 
-          //Inscribir alumno a materia, buscando el idAlumno y idMateria
-//            AlumnoData alData = new AlumnoData();
-//            MateriaData matData = new MateriaData();
-//            InscripcionData iData = new InscripcionData();
-//            
-//            Alumno alBuscar = alData.buscarAlumno(5);
-//            Materia matBuscar = matData.buscarMateria(1);
-//            
-//            Inscripcion insc = new Inscripcion(alBuscar,matBuscar,7.2);
-//            
-//            iData.guardarInscripcion(insc);
-//
+        // Inscribir alumno a materia, buscando el idAlumno y idMateria
+        AlumnoData alData = new AlumnoData();
+        MateriaData matData = new MateriaData();
+        InscripcionData iData = new InscripcionData();
+
+        Alumno alBuscar = alData.buscarAlumno(5);
+        Materia matBuscar = matData.buscarMateria(4);
+
+        Inscripcion insc = new Inscripcion(alBuscar,matBuscar,7.2);
+
+        iData.guardarInscripcion(insc);
+
         
     } 
 }

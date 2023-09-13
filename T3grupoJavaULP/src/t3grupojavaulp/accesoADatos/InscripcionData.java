@@ -23,15 +23,14 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion insc) {
-        // TODO
         String sql = "INSERT INTO `inscripcion`( `nota`, `idAlumno`, `idMateria`) VALUES (?,?,?);";
         
         try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                
-                ps.setDouble(3, insc.getNota());
-                ps.setInt(1, insc.getAlumno().getIdAlumno());
-                ps.setInt(2, insc.getMateria().getIdMateria());
+                ps.setDouble(1, insc.getNota());
+                ps.setInt(2, insc.getAlumno().getIdAlumno());
+                ps.setInt(3, insc.getMateria().getIdMateria());
                 ps.executeUpdate();
                 ResultSet res = ps.getGeneratedKeys();
                 if(res.next()){
@@ -41,6 +40,8 @@ public class InscripcionData {
             
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error SQL");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error guardando la inscripción: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }

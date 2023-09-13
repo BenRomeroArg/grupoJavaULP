@@ -31,16 +31,24 @@ public class Inscripcion {
         this.idInscripcion = idInscripcion;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public Alumno getAlumno() throws Exception {
+        if (alumno != null) {
+            return alumno;
+        } else {
+            throw new Exception("No existe el alumno.");
+        }
     }
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public Materia getMateria() throws Exception {
+        if (materia != null) {
+            return materia;
+        } else {
+            throw new Exception("No existe la materia.");
+        }
     }
 
     public void setMateria(Materia materia) {
