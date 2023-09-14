@@ -16,9 +16,9 @@ import t3grupojavaulp.Entidades.Inscripcion;
 
 public class InscripcionData {
 
-    Connection con;
-    MateriaData matData;
-    AlumnoData aluData;
+    private Connection con;
+    private MateriaData matData = new MateriaData();
+    private AlumnoData aluData = new AlumnoData();
 
     public InscripcionData() {
         con = Conexion.conectar();
@@ -60,8 +60,8 @@ public class InscripcionData {
                Inscripcion ins = new Inscripcion();
                 ins.setIdInscripcion(res.getInt("idInscripto"));
                 ins.setNota(res.getDouble("nota"));
-                ins.setAlumno(res.getInt("idAlumno"));
-                ins.setMateria(res.getInt("idMateria"));
+                ins.setAlumno(aluData.buscarAlumno(res.getInt("idAlumno")));
+                ins.setMateria(matData.buscarMateria(res.getInt("idMateria")));
                 insList.add(ins);
             } 
             

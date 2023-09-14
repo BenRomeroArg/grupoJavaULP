@@ -41,8 +41,12 @@ public class T3grupoJavaULP {
 //        iData.guardarInscripcion(insc);
         //iData.actualizarNota(5, 4, 9);
         //iData.borrarInscripcionMateriaAlumno(5, 4);
-        for (Alumno a: iData.obtenerAlumnosXMateria(4)) {
-            System.out.println(a.toString());
-        }     
+//        for (Alumno a: iData.obtenerAlumnosXMateria(4)) {
+//            System.out.println(a.toString());
+//        }
+        
+        for (Inscripcion i : iData.obtenerInscripciones()) {
+            System.out.println(i.toString());
+        }
     } 
 }
