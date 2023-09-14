@@ -40,7 +40,7 @@ public class T3grupoJavaULP {
 
         //iData.guardarInscripcion(insc);
         //iData.actualizarNota(5, 4, 9);
-        
+        //iData.borrarInscripcionMateriaAlumno(5, 4);
 
         
     } 
