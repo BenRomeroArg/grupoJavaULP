@@ -50,6 +50,10 @@ public class InscripcionData {
 
     public ArrayList<Inscripcion> obtenerInscripciones() {
         // TODO
+        
+        
+        
+        
         return null;
     }
 
@@ -146,7 +150,7 @@ public class InscripcionData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener alumnos" + e.getMessage());
         }
-        return alumnos;
+        return alumno;
 
     }
 
