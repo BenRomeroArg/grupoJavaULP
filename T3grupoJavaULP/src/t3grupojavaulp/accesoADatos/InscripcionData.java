@@ -73,9 +73,40 @@ public class InscripcionData {
     
     }
 
+    /***
+     * Regresa la lista de inscripciones del alumno correspondiente a <b>id</b>
+     * 
+     * 
+     * @param id idAlumno del alumno
+     * @return Lista de inscripciones del alumno.
+     * @see ArrayList
+     * @see Alumno
+     * @see Inscripcion
+     */
     public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int id) {
-        // TODO
-        return null;
+        ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+        String sql =    "SELECT i.* FROM inscripcion AS i " +
+                        "INNER JOIN alumno AS a ON a.idAlumno = i.idAlumno " +
+                        "INNER JOIN materia AS m ON m.idMateria = i.idMateria " +
+                        "WHERE a.idAlumno = ? AND a.estado = 1;";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {      
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Inscripcion inscripcion = new Inscripcion(  rs.getInt("idInscripto"), 
+                                                            aluData.buscarAlumno(rs.getInt("idAlumno")), 
+                                                            matData.buscarMateria(rs.getInt("idMateria")),
+                                                            rs.getDouble("nota"));
+                inscripciones.add(inscripcion);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return inscripciones;
     }
 
     public ArrayList<Materia> obtenerMateriasCursadas(int id) {

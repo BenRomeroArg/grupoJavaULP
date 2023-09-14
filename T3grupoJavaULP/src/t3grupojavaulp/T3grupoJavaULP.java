@@ -2,6 +2,8 @@ package t3grupojavaulp;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Inscripcion;
 import t3grupojavaulp.Entidades.Materia;
@@ -45,8 +47,16 @@ public class T3grupoJavaULP {
 //            System.out.println(a.toString());
 //        }
         
-        for (Inscripcion i : iData.obtenerInscripciones()) {
-            System.out.println(i.toString());
-        }
+//        for (Inscripcion i : iData.obtenerInscripciones()) {
+//            System.out.println(i.toString());
+//        }
+
+//          for (Inscripcion i : iData.obtenerInscripcionesPorAlumno(5)) {
+//            try {
+//                System.out.println(i.getMateria().toString());
+//            } catch (Exception ex) {
+//                Logger.getLogger(T3grupoJavaULP.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//          }
     } 
 }
