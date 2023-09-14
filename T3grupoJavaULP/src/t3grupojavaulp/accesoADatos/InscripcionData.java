@@ -151,7 +151,7 @@ public class InscripcionData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener alumnos" + e.getMessage());
         }
-        return alumno;
+        return alumnos;
 
     }
 
