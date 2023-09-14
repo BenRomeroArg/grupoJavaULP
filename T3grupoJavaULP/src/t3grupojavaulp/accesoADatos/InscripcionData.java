@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import t3grupojavaulp.Entidades.Materia;
@@ -24,26 +26,26 @@ public class InscripcionData {
 
     public void guardarInscripcion(Inscripcion insc) {
         String sql = "INSERT INTO `inscripcion`( `nota`, `idAlumno`, `idMateria`) VALUES (?,?,?);";
-        
+
         try {
-                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-               
-                ps.setDouble(1, insc.getNota());
-                ps.setInt(2, insc.getAlumno().getIdAlumno());
-                ps.setInt(3, insc.getMateria().getIdMateria());
-                ps.executeUpdate();
-                ResultSet res = ps.getGeneratedKeys();
-                if(res.next()){
-                    JOptionPane.showMessageDialog(null, "Se guardo la inscripcion con exito!");
-                }
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setDouble(1, insc.getNota());
+            ps.setInt(2, insc.getAlumno().getIdAlumno());
+            ps.setInt(3, insc.getMateria().getIdMateria());
+            ps.executeUpdate();
+            ResultSet res = ps.getGeneratedKeys();
+            if (res.next()) {
+                JOptionPane.showMessageDialog(null, "Se guardo la inscripcion con exito!");
+            }
             ps.close();
-            
+
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error SQL");
+            JOptionPane.showMessageDialog(null, "Error SQL");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error guardando la inscripción: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     public ArrayList<Inscripcion> obtenerInscripciones() {
@@ -57,16 +59,16 @@ public class InscripcionData {
     }
 
     public ArrayList<Materia> obtenerMateriasCursadas(int id) {
-        ArrayList<Materia> materias= new ArrayList<>();
+        ArrayList<Materia> materias = new ArrayList<>();
         try {
-            String sql= "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia"
-                      + "WHERE inscripcion.idMateria= materia.idMateria AND inscripcion.idAlumno=?";
-            PreparedStatement ps=con.prepareStatement(sql);
+            String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia"
+                    + "WHERE inscripcion.idMateria= materia.idMateria AND inscripcion.idAlumno=?";
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             Materia materia;
             while (rs.next()) {
-                materia=new Materia();
+                materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("año"));
@@ -74,7 +76,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener inscripción"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripción" + e.getMessage());
         }
         return materias;
     }
@@ -88,6 +90,22 @@ public class InscripcionData {
     }
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
+        String sql = "UPDATE `inscripcion` SET `nota`= ? WHERE idAlumno = ? AND idMateria = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Nota actualizada!");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error SQL!");
+        }
 
     }
 
