@@ -140,6 +140,7 @@ public class InscripcionData {
                         rs.getString("nombre"),
                         rs.getDate("fechaDeNacimiento"),
                         rs.getBoolean("estado"));
+                alumnos.add(alumno);
             }
             ps.close();
 
