@@ -145,6 +145,7 @@ public class InscripcionData {
                         rs.getDate("fechaDeNacimiento"),
                         rs.getBoolean("estado"));
                 alumnos.add(alumno);
+                System.out.println(alumno.toString());//lista por consola
             }
             ps.close();
 
