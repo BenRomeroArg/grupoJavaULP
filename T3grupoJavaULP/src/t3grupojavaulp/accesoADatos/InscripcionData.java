@@ -50,11 +50,27 @@ public class InscripcionData {
 
     public ArrayList<Inscripcion> obtenerInscripciones() {
         // TODO
-        
-        
-        
-        
-        return null;
+        String sql = "SELECT * FROM inscripcion";
+        ArrayList<Inscripcion> insList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+               Inscripcion ins = new Inscripcion();
+                ins.setIdInscripcion(res.getInt("idInscripto"));
+                ins.setNota(res.getDouble("nota"));
+                ins.setAlumno(res.getInt("idAlumno"));
+                ins.setMateria(res.getInt("idMateria"));
+                insList.add(ins);
+            } 
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");
+        }
+        return insList;
+    
     }
 
     public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int id) {
