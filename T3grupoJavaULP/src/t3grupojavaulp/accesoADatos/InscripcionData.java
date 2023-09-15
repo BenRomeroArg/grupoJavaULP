@@ -114,7 +114,7 @@ public class InscripcionData {
         ArrayList<Materia> materias = new ArrayList<>();
         try {
             String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia"
-                    + "WHERE inscripcion.idMateria= materia.idMateria AND inscripcion.idAlumno=?";
+                    + "WHERE inscripcion.idMateria= materia.idMateria AND materia.estado=1 AND inscripcion.idAlumno=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
