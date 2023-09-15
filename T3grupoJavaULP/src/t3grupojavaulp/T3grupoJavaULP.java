@@ -12,10 +12,10 @@ import t3grupojavaulp.accesoADatos.Conexion;
 import t3grupojavaulp.accesoADatos.InscripcionData;
 import t3grupojavaulp.accesoADatos.MateriaData;
 
-
 public class T3grupoJavaULP {
+
     public static void main(String[] args) {
-        Connection con=Conexion.conectar();
+        Connection con = Conexion.conectar();
 //        AlumnoData AD=new AlumnoData();
 //        MateriaData MD = new MateriaData();
 //        for(Alumno al: AD.listarAlumnos()){
@@ -29,7 +29,6 @@ public class T3grupoJavaULP {
 //            System.out.println(m.getNombre());
 //        }
 
-
         // Inscribir alumno a materia, buscando el idAlumno y idMateria
 //        AlumnoData alData = new AlumnoData();
 //        MateriaData matData = new MateriaData();
@@ -39,18 +38,15 @@ public class T3grupoJavaULP {
 //        Materia matBuscar = matData.buscarMateria(6);
 //
 //        Inscripcion insc = new Inscripcion(alBuscar,matBuscar,8.2);
-
 //        iData.guardarInscripcion(insc);
         //iData.actualizarNota(5, 4, 9);
         //iData.borrarInscripcionMateriaAlumno(5, 4);
 //        for (Alumno a: iData.obtenerAlumnosXMateria(4)) {
 //            System.out.println(a.toString());
 //        }
-        
 //        for (Inscripcion i : iData.obtenerInscripciones()) {
 //            System.out.println(i.toString());
 //        }
-
 //          for (Inscripcion i : iData.obtenerInscripcionesPorAlumno(5)) {
 //            try {
 //                System.out.println(i.getMateria().toString());
@@ -58,5 +54,9 @@ public class T3grupoJavaULP {
 //                Logger.getLogger(T3grupoJavaULP.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //          }
-    } 
+    //    for (Materia i : iData.obtenerMateriasNOCursadas(3)) {
+    //        System.out.println(i.toString());
+    //    }
+
+    }
 }
