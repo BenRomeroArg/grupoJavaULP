@@ -193,6 +193,14 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+        int dni = Integer.parseInt(jtDocumento.getText());
+        Alumno busqueda = alData.buscarAlumnoPorDni(dni);
+        
+        jtApellido.setText(busqueda.getApellido());
+        jtNombre.setText(busqueda.getNombre());
+        jbEstado.setSelected(busqueda.isEstado());
+        jDateChooser1.setDate(busqueda.getFechaNacimiento());
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
