@@ -188,17 +188,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         String apellido = jtApellido.getText();
         String nombre = jtNombre.getText();
         boolean estado = jbEstado.isSelected();
-       
-        
+
         Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
-        
-       alumno = new Alumno(dni, nombre, apellido, fecha, estado);
-       
-       alData.guardarAlumno(alumno);
-        
-        
-        
-        
+
+        alumno = new Alumno(dni, nombre, apellido, fecha, estado);
+
+        alData.guardarAlumno(alumno);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
 

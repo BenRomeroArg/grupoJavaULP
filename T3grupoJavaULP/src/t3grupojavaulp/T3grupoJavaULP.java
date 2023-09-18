@@ -54,9 +54,9 @@ public class T3grupoJavaULP {
 //                Logger.getLogger(T3grupoJavaULP.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //          }
-    //    for (Materia i : iData.obtenerMateriasNOCursadas(3)) {
-    //        System.out.println(i.toString());
-   //     }
+//        for (Materia i : iData.obtenerMateriasNOCursadas(3)) {
+//            System.out.println(i.toString());
+//        }
 
     }
 }
