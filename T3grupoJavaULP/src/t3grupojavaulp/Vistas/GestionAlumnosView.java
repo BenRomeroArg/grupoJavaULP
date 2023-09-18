@@ -17,6 +17,14 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     public GestionAlumnosView() {
         initComponents();
     }
+    
+    private void clearFields() {
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jbEstado.setSelected(false);
+        jDateChooser1.setDate(null);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -201,15 +209,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         alData.guardarAlumno(alumno);
 
         // Limpiar campos
-        jtDocumento.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jbEstado.setSelected(false);
-        jDateChooser1.setDate(null);
+        clearFields();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        this.hide();/// TODO add your handling code here:
+        clearFields();
+        this.hide();
     }//GEN-LAST:event_jbSalirActionPerformed
 
 
