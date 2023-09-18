@@ -37,6 +37,7 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenu6 = new javax.swing.JMenu();
         jOrdenarAlumnosMateria = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -114,11 +115,15 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenuBar2.add(jMenu6);
 
         jMenu7.setText("Salir");
-        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+
+        jMenuItem3.setText("Salir del sistema");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu7ActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
+        jMenu7.add(jMenuItem3);
+
         jMenuBar2.add(jMenu7);
 
         setJMenuBar(jMenuBar2);
@@ -173,9 +178,9 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         Escritorio.moveToFront(camV);
     }//GEN-LAST:event_jOrdenarAlumnosMateriaActionPerformed
 
-    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
-System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu7ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,6 +234,7 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jOrdenarAlumnosMateria;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem jmForAlumno;
