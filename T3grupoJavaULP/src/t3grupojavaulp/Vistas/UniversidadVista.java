@@ -114,6 +114,11 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenuBar2.add(jMenu6);
 
         jMenu7.setText("Salir");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
         jMenuBar2.add(jMenu7);
 
         setJMenuBar(jMenuBar2);
@@ -167,6 +172,10 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         Escritorio.add(camV);
         Escritorio.moveToFront(camV);
     }//GEN-LAST:event_jOrdenarAlumnosMateriaActionPerformed
+
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu7ActionPerformed
 
     /**
      * @param args the command line arguments
