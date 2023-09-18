@@ -1,12 +1,19 @@
 package t3grupojavaulp.Vistas;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import t3grupojavaulp.Entidades.Alumno;
+import t3grupojavaulp.accesoADatos.AlumnoData;
+
 /**
  *
  * @author Ignacio C.
  */
 public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
-
+     private AlumnoData alData = new AlumnoData();
+     private Alumno alumno; 
+     
     public GestionAlumnosView() {
         initComponents();
     }
@@ -64,6 +71,11 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         });
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -169,6 +181,25 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        int dni = Integer.parseInt(jtDocumento.getText());
+        String apellido = jtApellido.getText();
+        String nombre = jtNombre.getText();
+        boolean estado = jbEstado.isSelected();
+       
+        
+        Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
+        
+       alumno = new Alumno(dni, nombre, apellido, fecha, estado);
+       
+       alData.guardarAlumno(alumno);
+        
+        
+        
+        
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
