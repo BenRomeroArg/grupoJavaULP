@@ -214,7 +214,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         clearFields();
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
 
