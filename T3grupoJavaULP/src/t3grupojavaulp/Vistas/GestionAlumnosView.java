@@ -194,6 +194,13 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         alumno = new Alumno(dni, nombre, apellido, fecha, estado);
 
         alData.guardarAlumno(alumno);
+
+        // Limpiar campos
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jbEstado.setSelected(false);
+        jDateChooser1.setDate(null);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
 
