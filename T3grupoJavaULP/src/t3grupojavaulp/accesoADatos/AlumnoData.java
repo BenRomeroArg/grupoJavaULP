@@ -31,8 +31,8 @@ public class AlumnoData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                //alumno.setIdAlumno(rs.getInt("idAlumno"));
-                JOptionPane.showMessageDialog(null, "El alumno se añadio con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                alumno.setIdAlumno(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "El alumno se añadio con exito, ID: " + alumno.getIdAlumno(), "Exito", JOptionPane.INFORMATION_MESSAGE);
             }
             ps.close();
         } catch (SQLException e) {
