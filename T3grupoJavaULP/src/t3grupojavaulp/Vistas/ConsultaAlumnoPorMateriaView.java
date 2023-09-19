@@ -1,7 +1,10 @@
 
 package t3grupojavaulp.Vistas;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import t3grupojavaulp.Entidades.Alumno;
+import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.accesoADatos.InscripcionData;
 import t3grupojavaulp.accesoADatos.MateriaData;
 
@@ -128,9 +131,19 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
-        MateriaData materiaSeleccionada= (MateriaData) jcbSeleccionMateria.getSelectedItem();
-        for(InscripcionData al: UniversidadVista.listaAlumnos){
-            /// Completar para que aparezca en tabla
+        MateriaData mD=new MateriaData();
+        ArrayList<Materia> listaMaterias=mD.listarMaterias();
+        for(Materia mat: listaMaterias){
+            jcbSeleccionMateria.addItem(mat);
+        }
+        Materia materiaSeleccionada= (Materia) jcbSeleccionMateria.getSelectedItem();
+        int mS=materiaSeleccionada.getIdMateria();
+        InscripcionData inscData=new InscripcionData();
+        ArrayList<Alumno> alumnosMateria= inscData.obtenerAlumnosXMateria(mS);
+        
+        for(Alumno al: alumnosMateria){
+            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(),al.getNombre()});
+
         }
         
     }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
@@ -143,7 +156,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbSeleccionMateria;
+    private javax.swing.JComboBox<Materia> jcbSeleccionMateria;
     // End of variables declaration//GEN-END:variables
 
      private void armarCabecera(){

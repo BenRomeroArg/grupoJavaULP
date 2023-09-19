@@ -57,6 +57,7 @@ public class T3grupoJavaULP {
 //        for (Materia i : iData.obtenerMateriasNOCursadas(3)) {
 //            System.out.println(i.toString());
 //        }
-
+        MateriaData mD= new MateriaData();
+        mD.listarMaterias();
     }
 }
