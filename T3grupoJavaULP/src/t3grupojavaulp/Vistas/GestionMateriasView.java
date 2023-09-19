@@ -178,7 +178,8 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEstadoActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        
+        //AGREGAR MATERIA NUEVA
+
         String nombre = jtNombre.getText();
         int año = Integer.parseInt(jtAnio.getText());
         boolean estado = jbEstado.isSelected();
