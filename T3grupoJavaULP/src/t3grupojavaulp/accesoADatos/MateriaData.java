@@ -99,7 +99,7 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "La materia no existe en la base de datos.", "Error", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), "SQL ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -118,7 +118,7 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "Se eliminó la materia.", "Exito", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), "SQL ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -142,7 +142,7 @@ public class MateriaData {
                 materias.add(materia);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), sql, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), "SQL ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return materias;
     }
