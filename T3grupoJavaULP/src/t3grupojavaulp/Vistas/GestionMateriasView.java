@@ -1,5 +1,8 @@
-
 package t3grupojavaulp.Vistas;
+
+import java.sql.Date;
+import t3grupojavaulp.Entidades.Materia;
+import t3grupojavaulp.accesoADatos.MateriaData;
 
 /**
  *
@@ -7,10 +10,13 @@ package t3grupojavaulp.Vistas;
  */
 public class GestionMateriasView extends javax.swing.JInternalFrame {
 
+    private MateriaData matData = new MateriaData();
+    private Materia materia;
+
     public GestionMateriasView() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,6 +66,11 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jbBuscar.setText("Buscar");
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
@@ -155,9 +166,30 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearFields() {
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jbEstado.setSelected(false);
+    }
+
     private void jbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbEstadoActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        int id = Integer.parseInt(jtCodigo.getText());
+        String nombre = jtNombre.getText();
+        int año = Integer.parseInt(jtAnio.getText());
+        boolean estado = jbEstado.isSelected();
+
+        Materia materia = new Materia(nombre, año, estado);
+
+        matData.guardarMateria(materia);
+        // Limpiar campos
+        clearFields();
+
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
