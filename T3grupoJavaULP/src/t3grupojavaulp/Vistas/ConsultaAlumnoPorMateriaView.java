@@ -14,6 +14,8 @@ import t3grupojavaulp.accesoADatos.MateriaData;
  */
 public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     
+    private MateriaData matData = new MateriaData();
+    
     private DefaultTableModel modelo=new DefaultTableModel(){
      public boolean isCellEditable(int f, int c){
          return false; //Todas las celdas no son editables
@@ -22,6 +24,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
             
     public ConsultaAlumnoPorMateriaView(){
         initComponents();
+        rellenarComboBox();
         armarCabecera();
     }
 
@@ -62,12 +65,6 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jbSalir.setText("Salir");
-
-        jcbSeleccionMateria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSeleccionMateriaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -130,24 +127,6 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
-        MateriaData mD=new MateriaData();
-        ArrayList<Materia> listaMaterias=mD.listarMaterias();
-        for(Materia mat: listaMaterias){
-            jcbSeleccionMateria.addItem(mat);
-        }
-        Materia materiaSeleccionada= (Materia) jcbSeleccionMateria.getSelectedItem();
-        int mS=materiaSeleccionada.getIdMateria();
-        InscripcionData inscData=new InscripcionData();
-        ArrayList<Alumno> alumnosMateria= inscData.obtenerAlumnosXMateria(mS);
-        
-        for(Alumno al: alumnosMateria){
-            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(),al.getNombre()});
-
-        }
-        
-    }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -170,6 +149,22 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         int f=jTable1.getRowCount()-1;
         for(; f>=0; f--){
             modelo.removeRow(f);
+        }
+    }
+    
+    private void rellenarComboBox() {
+        ArrayList<Materia> listaMaterias=matData.listarMaterias();
+        for(Materia mat: listaMaterias){
+            jcbSeleccionMateria.addItem(mat);
+        }
+        Materia materiaSeleccionada= (Materia) jcbSeleccionMateria.getSelectedItem();
+        int mS=materiaSeleccionada.getIdMateria();
+        InscripcionData inscData=new InscripcionData();
+        ArrayList<Alumno> alumnosMateria= inscData.obtenerAlumnosXMateria(mS);
+        
+        for(Alumno al: alumnosMateria){
+            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(),al.getNombre()});
+
         }
     }
 }

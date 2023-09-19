@@ -1,4 +1,4 @@
-package t3grupojavaulp;
+/*package t3grupojavaulp;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -61,3 +61,4 @@ public class T3grupoJavaULP {
         mD.listarMaterias();
     }
 }
+*/
