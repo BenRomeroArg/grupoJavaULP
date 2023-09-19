@@ -88,9 +88,10 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaDeNacimiento"));
                 alumno.setEstado(true);
 
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            //else {
+//                JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
