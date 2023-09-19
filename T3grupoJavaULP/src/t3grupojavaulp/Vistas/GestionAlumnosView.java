@@ -2,6 +2,7 @@ package t3grupojavaulp.Vistas;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.accesoADatos.AlumnoData;
 
@@ -194,12 +195,18 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         int dni = Integer.parseInt(jtDocumento.getText());
-        Alumno busqueda = alData.buscarAlumnoPorDni(dni);
+        try{
+            Alumno busqueda = alData.buscarAlumnoPorDni(dni);
         
-        jtApellido.setText(busqueda.getApellido());
-        jtNombre.setText(busqueda.getNombre());
-        jbEstado.setSelected(busqueda.isEstado());
-        jDateChooser1.setDate(busqueda.getFechaNacimiento());
+            jtApellido.setText(busqueda.getApellido());
+            jtNombre.setText(busqueda.getNombre());
+            jbEstado.setSelected(busqueda.isEstado());
+            jDateChooser1.setDate(busqueda.getFechaNacimiento());
+        
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
+            jtDocumento.setText("");
+        }
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
