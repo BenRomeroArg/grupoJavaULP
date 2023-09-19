@@ -205,6 +205,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
+            jtDocumento.setText("");
         }
         
     }//GEN-LAST:event_jbBuscarActionPerformed
