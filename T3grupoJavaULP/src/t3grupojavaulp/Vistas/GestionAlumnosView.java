@@ -212,19 +212,20 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        int dni = Integer.parseInt(jtDocumento.getText());
-        String apellido = jtApellido.getText();
-        String nombre = jtNombre.getText();
-        boolean estado = jbEstado.isSelected();
-
-        Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
-
-        alumno = new Alumno(dni, nombre, apellido, fecha, estado);
-
-        alData.guardarAlumno(alumno);
-
-        // Limpiar campos
-        clearFields();
+        try{
+            int dni = Integer.parseInt(jtDocumento.getText());
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            boolean estado = jbEstado.isSelected();
+            Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
+            alumno = new Alumno(dni, nombre, apellido, fecha, estado);
+            alData.guardarAlumno(alumno);
+            // Limpiar campos
+            clearFields();
+        } catch(Exception ex){
+            System.out.println(ex.getStackTrace());
+            JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
