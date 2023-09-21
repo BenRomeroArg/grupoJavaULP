@@ -208,11 +208,11 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             jbEstado.setSelected(busqueda.isEstado());
             jDateChooser1.setDate(busqueda.getFechaNacimiento());
             
-            
+            jtDocumento.setEditable(false);
             jtApellido.setEditable(false);
             jtNombre.setEditable(false);
-            
-            
+            jbEstado.setEnabled(false);
+            jDateChooser1.setEnabled(false);
         
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -245,7 +245,11 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        
+        jtDocumento.setEditable(true);
+        jtApellido.setEditable(true);
+        jtNombre.setEditable(true);
+        jbEstado.setEnabled(true);
+        jDateChooser1.setEnabled(true);
     }//GEN-LAST:event_jbActualizarActionPerformed
 
 
