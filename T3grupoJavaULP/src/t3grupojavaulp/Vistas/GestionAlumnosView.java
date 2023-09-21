@@ -17,6 +17,9 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
      
     public GestionAlumnosView() {
         initComponents();
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
+        jbActualizar.setEnabled(false);
     }
     
     private void clearFields() {
@@ -104,6 +107,11 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +215,10 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+        jbGuardar.setEnabled(true);
+        jbEliminar.setEnabled(true);
+        jbActualizar.setEnabled(true);
+        
         int dni = Integer.parseInt(jtDocumento.getText());
         try{
             Alumno busqueda = alData.buscarAlumnoPorDni(dni);
@@ -221,6 +233,8 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             jtNombre.setEditable(false);
             jbEstado.setEnabled(false);
             jDateChooser1.setEnabled(false);
+            
+            jbNuevo.setEnabled(false);
         
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -240,7 +254,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             alumno = new Alumno(dni, nombre, apellido, fecha, estado);
             alData.guardarAlumno(alumno);
             // Limpiar campos
-            clearFields();
+            clearFields();        
         } catch(NumberFormatException ex){
             
             JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
@@ -249,16 +263,38 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         clearFields();
-        
+        jbNuevo.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        jtDocumento.setEditable(true);
+        jtDocumento.setEditable(false);
         jtApellido.setEditable(true);
         jtNombre.setEditable(true);
         jbEstado.setEnabled(true);
         jDateChooser1.setEnabled(true);
+        jbNuevo.setEnabled(false);
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+         try{                    
+            int dni = Integer.parseInt(jtDocumento.getText());
+            Alumno id = alData.buscarAlumnoPorDni(dni);
+            int idAlumno = id.getIdAlumno();
+            
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            boolean estado = jbEstado.isSelected();
+            Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
+            alumno = new Alumno(idAlumno,dni, nombre, apellido, fecha, estado);
+            alData.modificarAlumno(alumno);
+            // Limpiar campos
+            clearFields();
+             jbNuevo.setEnabled(true);
+        } catch(NumberFormatException ex){
+            
+            JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
