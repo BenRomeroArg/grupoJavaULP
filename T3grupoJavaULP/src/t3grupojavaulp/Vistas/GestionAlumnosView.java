@@ -89,6 +89,11 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbEliminar.setText("Eliminar");
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +207,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             jtNombre.setText(busqueda.getNombre());
             jbEstado.setSelected(busqueda.isEstado());
             jDateChooser1.setDate(busqueda.getFechaNacimiento());
+            
+            
+            jtApellido.setEditable(false);
+            jtNombre.setEditable(false);
+            
+            
         
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -232,6 +243,10 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         clearFields();
         
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
