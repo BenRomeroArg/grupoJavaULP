@@ -33,9 +33,9 @@
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                       <Component id="jbEliminar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                      <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbActualizar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                      <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -77,7 +77,7 @@
                       <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="65" pref="70" max="32767" attributes="0"/>
+              <EmptySpace min="65" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -131,8 +131,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
                           <Component id="jbEliminar" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbActualizar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbLimpiar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -211,17 +211,17 @@
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbGuardar">
+    <Component class="javax.swing.JButton" name="jbActualizar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Guardar"/>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbSalir">
+    <Component class="javax.swing.JButton" name="jbLimpiar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarActionPerformed"/>
       </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">

@@ -44,8 +44,8 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jbGuardar = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
@@ -88,12 +88,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
         jbEliminar.setText("Eliminar");
 
-        jbGuardar.setText("Guardar");
+        jbActualizar.setText("Actualizar");
 
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -109,9 +109,9 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbGuardar)
+                        .addComponent(jbActualizar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbSalir))
+                        .addComponent(jbLimpiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -140,7 +140,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
                                     .addComponent(jtApellido))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbBuscar)))
-                .addGap(65, 70, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -183,8 +183,8 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbNuevo)
                             .addComponent(jbEliminar)
-                            .addComponent(jbGuardar)
-                            .addComponent(jbSalir)))
+                            .addComponent(jbActualizar)
+                            .addComponent(jbLimpiar)))
                     .addComponent(jLabel5))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -222,15 +222,16 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             alData.guardarAlumno(alumno);
             // Limpiar campos
             clearFields();
-        } catch(Exception ex){
-            System.out.println(ex.getStackTrace());
+        } catch(NumberFormatException ex){
+            
             JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jbSalirActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        clearFields();
+        
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,12 +242,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JRadioButton jbEstado;
-    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbNuevo;
-    private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
