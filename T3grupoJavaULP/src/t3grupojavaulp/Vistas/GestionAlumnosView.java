@@ -12,16 +12,16 @@ import t3grupojavaulp.accesoADatos.AlumnoData;
  */
 public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
-     private AlumnoData alData = new AlumnoData();
-     private Alumno alumno; 
-     
+    private AlumnoData alData = new AlumnoData();
+    private Alumno alumno;
+
     public GestionAlumnosView() {
         initComponents();
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
         jbActualizar.setEnabled(false);
     }
-    
+
     private void clearFields() {
         jtDocumento.setText("");
         jtApellido.setText("");
@@ -218,34 +218,37 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbGuardar.setEnabled(true);
         jbEliminar.setEnabled(true);
         jbActualizar.setEnabled(true);
-        
+
         int dni = Integer.parseInt(jtDocumento.getText());
-        try{
+        try {
             Alumno busqueda = alData.buscarAlumnoPorDni(dni);
-        
+
             jtApellido.setText(busqueda.getApellido());
             jtNombre.setText(busqueda.getNombre());
             jbEstado.setSelected(busqueda.isEstado());
             jDateChooser1.setDate(busqueda.getFechaNacimiento());
-            
+
             jtDocumento.setEditable(false);
             jtApellido.setEditable(false);
             jtNombre.setEditable(false);
             jbEstado.setEnabled(false);
             jDateChooser1.setEnabled(false);
-            
+
             jbNuevo.setEnabled(false);
-        
-        } catch (NullPointerException ex){
+
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
             jtDocumento.setText("");
+            jbGuardar.setEnabled(false);
+            jbEliminar.setEnabled(false);
+            jbActualizar.setEnabled(false);
         }
-        
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             int dni = Integer.parseInt(jtDocumento.getText());
             String apellido = jtApellido.getText();
             String nombre = jtNombre.getText();
@@ -254,10 +257,10 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             alumno = new Alumno(dni, nombre, apellido, fecha, estado);
             alData.guardarAlumno(alumno);
             // Limpiar campos
-            clearFields();        
-        } catch(NumberFormatException ex){
-            
-            JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
+            clearFields();
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -276,23 +279,23 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-         try{                    
+        try {
             int dni = Integer.parseInt(jtDocumento.getText());
             Alumno id = alData.buscarAlumnoPorDni(dni);
             int idAlumno = id.getIdAlumno();
-            
+
             String apellido = jtApellido.getText();
             String nombre = jtNombre.getText();
             boolean estado = jbEstado.isSelected();
             Date fecha = new java.sql.Date(jDateChooser1.getDate().getTime());
-            alumno = new Alumno(idAlumno,dni, nombre, apellido, fecha, estado);
+            alumno = new Alumno(idAlumno, dni, nombre, apellido, fecha, estado);
             alData.modificarAlumno(alumno);
             // Limpiar campos
             clearFields();
-             jbNuevo.setEnabled(true);
-        } catch(NumberFormatException ex){
-            
-            JOptionPane.showMessageDialog(null,"Formulario incompleto","ERROR", JOptionPane.ERROR_MESSAGE);
+            jbNuevo.setEnabled(true);
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
