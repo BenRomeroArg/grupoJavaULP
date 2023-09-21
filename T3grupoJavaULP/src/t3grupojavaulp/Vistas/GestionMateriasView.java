@@ -1,6 +1,8 @@
 package t3grupojavaulp.Vistas;
 
 import java.sql.Date;
+import javax.swing.JOptionPane;
+import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.accesoADatos.MateriaData;
 
@@ -15,6 +17,9 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
 
     public GestionMateriasView() {
         initComponents();
+        jtCodigo.setEditable(true);
+        jbGuardar.setEnabled(false);
+        jbEliminar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +41,7 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -64,6 +70,11 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         });
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +88,18 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jbGuardar.setText("Guardar");
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbActualizar.setText("Editar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,27 +109,18 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(6, 6, 6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jbNuevo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(6, 6, 6)
-                                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jbBuscar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jbBuscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
@@ -118,8 +132,17 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(jbEstado)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jbEstado)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jbNuevo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,11 +178,13 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
                     .addComponent(jbEstado))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbNuevo)
-                    .addComponent(jbEliminar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbNuevo)
+                        .addComponent(jbEliminar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbGuardar)
-                        .addComponent(jbSalir)))
+                        .addComponent(jbSalir)
+                        .addComponent(jbActualizar)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -171,6 +196,7 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtAnio.setText("");
         jbEstado.setSelected(false);
+
     }
 
     private void jbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadoActionPerformed
@@ -179,18 +205,53 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         //AGREGAR MATERIA NUEVA
+        try {
+            String nombre = jtNombre.getText();
+            int año = Integer.parseInt(jtAnio.getText());
+            boolean estado = jbEstado.isSelected();
+            Materia materia = new Materia(nombre, año, estado);
 
-        String nombre = jtNombre.getText();
-        int año = Integer.parseInt(jtAnio.getText());
-        boolean estado = jbEstado.isSelected();
+            matData.guardarMateria(materia);
+            // Limpiar campos
+            clearFields();
 
-        Materia materia = new Materia(nombre, año, estado);
+        } catch (NumberFormatException ex) {
 
-        matData.guardarMateria(materia);
-        // Limpiar campos
-        clearFields();
+            JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        try {
+            Materia busqueda = matData.buscarMateria(codigo);
+
+            jtNombre.setText(busqueda.getNombre());
+            jtAnio.setText(busqueda.getAnioMateria() + "");
+            jbEstado.setSelected(busqueda.isActivo());
+            jbNuevo.setEnabled(false);
+            jbGuardar.setEnabled(true);
+            jbEliminar.setEnabled(true);
+        } catch (NullPointerException ex) {
+            // JOptionPane.showMessageDialog(null, "No existe la materia", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+            clearFields();
+            jbGuardar.setEnabled(false);
+            jbEliminar.setEnabled(false);
+            jbNuevo.setEnabled(true);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,6 +261,7 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JRadioButton jbEstado;
