@@ -216,7 +216,6 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(true);
         jbActualizar.setEnabled(true);
 
-       
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
             Alumno busqueda = alData.buscarAlumnoPorDni(dni);
@@ -240,7 +239,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             jbGuardar.setEnabled(false);
             jbEliminar.setEnabled(false);
             jbActualizar.setEnabled(false);
-        } catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "El dni no esta registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
             jtDocumento.setText("");
             jbGuardar.setEnabled(false);
@@ -270,6 +269,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         clearFields();
+        jtDocumento.setEditable(true);
         jbNuevo.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
@@ -297,6 +297,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             // Limpiar campos
             clearFields();
             jbNuevo.setEnabled(true);
+            jtDocumento.setEditable(true);
         } catch (NumberFormatException ex) {
 
             JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
