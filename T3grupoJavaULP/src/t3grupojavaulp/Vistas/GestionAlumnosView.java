@@ -242,7 +242,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbGuardar.setEnabled(true);
         jbEliminar.setEnabled(true);
         jbEditar.setEnabled(true);
-        jbNuevo.setEnabled(true);
+        jbNuevo.setEnabled(false);
         jtDocumento.setEditable(false);
         jtApellido.setEditable(false);
         jtNombre.setEditable(false);
@@ -292,9 +292,10 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
         jtDocumento.setEditable(false);
+        jtDocumento.setEnabled(false);
         jtApellido.setEditable(true);
         jtNombre.setEditable(true);
-        jbEstado.setEnabled(true);
+        jbEstado.setEnabled(false); // Se usa eliminar para cambiar.
         jDateChooser1.setEnabled(true);
         jbNuevo.setEnabled(false);
     }//GEN-LAST:event_jbEditarActionPerformed
@@ -313,47 +314,26 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             alData.modificarAlumno(alumno);
             // Limpiar campos
             clearFields();
-            jbNuevo.setEnabled(true);
-            jtDocumento.setEditable(true);
         } catch (NumberFormatException ex) {
 
             JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            configInicial();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
             Alumno id = alData.buscarAlumnoPorDni(dni);
-            boolean estado = id.isEstado();
-            int idAlumno = id.getIdAlumno();
-            alData.eliminarAlumno(idAlumno);
-
-            if (estado == false) {
-                JOptionPane.showMessageDialog(null, "SE ELIMINO CON EXITO", "INFO", JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            clearFields();
-            jbNuevo.setEnabled(true);
-            jtDocumento.setEditable(true);
-            jtApellido.setEditable(true);
-            jtNombre.setEditable(true);
-            jbEstado.setEnabled(true);
-            jDateChooser1.setEnabled(true);
-
+            alData.eliminarAlumno(id.getIdAlumno());
+            
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No exite el registro", "ERROR", JOptionPane.ERROR_MESSAGE);
-            clearFields();
-            jbNuevo.setEnabled(true);
-            jtDocumento.setEditable(true);
-            jtApellido.setEditable(true);
-            jtNombre.setEditable(true);
-            jbEstado.setEnabled(true);
-            jDateChooser1.setEnabled(true);
-
+        } finally {
+            // Restauramos configuracion de botones y campos de texto inicial.
+            configInicial();
         }
-
     }//GEN-LAST:event_jbEliminarActionPerformed
 
 
