@@ -216,8 +216,9 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(true);
         jbActualizar.setEnabled(true);
 
-        int dni = Integer.parseInt(jtDocumento.getText());
+       
         try {
+            int dni = Integer.parseInt(jtDocumento.getText());
             Alumno busqueda = alData.buscarAlumnoPorDni(dni);
 
             jtApellido.setText(busqueda.getApellido());
@@ -233,8 +234,14 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
             jbNuevo.setEnabled(false);
 
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No existe el alumno", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "El campo dni esta vacio", "ERROR", JOptionPane.ERROR_MESSAGE);
+            jtDocumento.setText("");
+            jbGuardar.setEnabled(false);
+            jbEliminar.setEnabled(false);
+            jbActualizar.setEnabled(false);
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "El dni no esta registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
             jtDocumento.setText("");
             jbGuardar.setEnabled(false);
             jbEliminar.setEnabled(false);
