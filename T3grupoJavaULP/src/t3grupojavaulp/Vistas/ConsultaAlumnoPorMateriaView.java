@@ -1,4 +1,3 @@
-
 package t3grupojavaulp.Vistas;
 
 import java.util.ArrayList;
@@ -13,19 +12,23 @@ import t3grupojavaulp.accesoADatos.MateriaData;
  * @author Ignacio C.
  */
 public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
-    
+
     private MateriaData matData = new MateriaData();
-    
-    private DefaultTableModel modelo=new DefaultTableModel(){
-     public boolean isCellEditable(int f, int c){
-         return false; //Todas las celdas no son editables
+    private InscripcionData inscData = new InscripcionData();
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false; //Todas las celdas no son editables
         }
     };
-            
-    public ConsultaAlumnoPorMateriaView(){
+
+    public ConsultaAlumnoPorMateriaView() {
         initComponents();
         rellenarComboBox();
         armarCabecera();
+        
+        
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -68,6 +71,12 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+
+        jcbSeleccionMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSeleccionMateriaActionPerformed(evt);
             }
         });
 
@@ -133,8 +142,12 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
+ cargarTabla();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -147,33 +160,46 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JComboBox<Materia> jcbSeleccionMateria;
     // End of variables declaration//GEN-END:variables
 
-     private void armarCabecera(){
+    private void armarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         jTable1.setModel(modelo);
     }
-    private void borrarFilas(){
-        int f=jTable1.getRowCount()-1;
-        for(; f>=0; f--){
+
+    private void borrarFilas() {
+        int f = jTable1.getRowCount() - 1;
+        for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-    
+
     private void rellenarComboBox() {
-        ArrayList<Materia> listaMaterias=matData.listarMaterias();
-        for(Materia mat: listaMaterias){
+        ArrayList<Materia> listaMaterias = matData.listarMaterias();
+        for (Materia mat : listaMaterias) {
             jcbSeleccionMateria.addItem(mat);
         }
-        Materia materiaSeleccionada= (Materia) jcbSeleccionMateria.getSelectedItem();
-        int mS=materiaSeleccionada.getIdMateria();
-        InscripcionData inscData=new InscripcionData();
-        ArrayList<Alumno> alumnosMateria= inscData.obtenerAlumnosXMateria(mS);
-        
-        for(Alumno al: alumnosMateria){
-            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(),al.getNombre()});
+        Materia materiaSeleccionada = (Materia) jcbSeleccionMateria.getSelectedItem();
+        int mS = materiaSeleccionada.getIdMateria();
+        InscripcionData inscData = new InscripcionData();
+        ArrayList<Alumno> alumnosMateria = inscData.obtenerAlumnosXMateria(mS);
 
+        for (Alumno al : alumnosMateria) {
+            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(), al.getNombre()});
+
+        }
+    }
+
+    private void cargarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0); // Limpio la tabla antes de cargar los datos
+        Materia materiaSeleccionada = (Materia) jcbSeleccionMateria.getSelectedItem();
+        int mS = materiaSeleccionada.getIdMateria();
+        ArrayList<Alumno> listaAlumnos = inscData.obtenerAlumnosXMateria(mS);
+
+        for (Alumno alumno : listaAlumnos) {
+            modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
         }
     }
 }
