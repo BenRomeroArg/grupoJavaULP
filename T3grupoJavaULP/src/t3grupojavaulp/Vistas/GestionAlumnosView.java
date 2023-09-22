@@ -14,19 +14,44 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
 
     private AlumnoData alData = new AlumnoData();
     private Alumno alumno;
-
+    
     public GestionAlumnosView() {
         initComponents();
-        jbGuardar.setEnabled(false);
+        configInicial();
+    }
+    
+    /***
+     * Configuración inicial de botones, y campos de texto habilitados y deshabilitados.
+     */
+    private void configInicial() {
+        clearFields();
+        
+        // FECHA
+        jDateChooser1.setEnabled(true);
+        
+        // BOTONES
+        jbBuscar.setEnabled(true);
+        jbLimpiar.setEnabled(true);
+        jbNuevo.setEnabled(true);
+        jbEditar.setEnabled(false);
         jbEliminar.setEnabled(false);
-        jbActualizar.setEnabled(false);
+        jbEstado.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        
+        // TEXTO
+        jtApellido.setEnabled(true);
+        jtApellido.setEditable(true);
+        jtDocumento.setEnabled(true);
+        jtDocumento.setEditable(true);
+        jtNombre.setEnabled(true);
+        jtNombre.setEditable(true);
     }
 
     private void clearFields() {
         jtDocumento.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
-        jbEstado.setSelected(false);
+        jbEstado.setSelected(true); // Quiza haya que eliminar jbEstado, a menos que se puedan rehabilitar dnis.
         jDateChooser1.setDate(null);
     }
 
@@ -50,7 +75,7 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jbActualizar = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
 
@@ -78,6 +103,8 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Fecha de nacimiento:");
 
+        jbEstado.setSelected(true);
+
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,13 +129,13 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         jPanel1.add(jbEliminar);
         jPanel1.add(filler1);
 
-        jbActualizar.setText("Editar");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+        jbEditar.setText("Editar");
+        jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
+                jbEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbActualizar);
+        jPanel1.add(jbEditar);
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +241,13 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jbGuardar.setEnabled(true);
         jbEliminar.setEnabled(true);
-        jbActualizar.setEnabled(true);
+        jbEditar.setEnabled(true);
+        jbNuevo.setEnabled(true);
+        jtDocumento.setEditable(false);
+        jtApellido.setEditable(false);
+        jtNombre.setEditable(false);
+        jbEstado.setEnabled(false);
+        jDateChooser1.setEnabled(false);
 
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
@@ -225,26 +258,12 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
             jbEstado.setSelected(busqueda.isEstado());
             jDateChooser1.setDate(busqueda.getFechaNacimiento());
 
-            jtDocumento.setEditable(false);
-            jtApellido.setEditable(false);
-            jtNombre.setEditable(false);
-            jbEstado.setEnabled(false);
-            jDateChooser1.setEnabled(false);
-
-            jbNuevo.setEnabled(false);
-
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "El campo dni esta vacio", "ERROR", JOptionPane.ERROR_MESSAGE);
-            jtDocumento.setText("");
-            jbGuardar.setEnabled(false);
-            jbEliminar.setEnabled(false);
-            jbActualizar.setEnabled(false);
+            configInicial();
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "El dni no esta registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
-            jtDocumento.setText("");
-            jbGuardar.setEnabled(false);
-            jbEliminar.setEnabled(false);
-            jbActualizar.setEnabled(false);
+            configInicial();
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -268,19 +287,17 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        clearFields();
-        jtDocumento.setEditable(true);
-        jbNuevo.setEnabled(true);
+        configInicial();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
         jtDocumento.setEditable(false);
         jtApellido.setEditable(true);
         jtNombre.setEditable(true);
         jbEstado.setEnabled(true);
         jDateChooser1.setEnabled(true);
         jbNuevo.setEnabled(false);
-    }//GEN-LAST:event_jbActualizarActionPerformed
+    }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         try {
@@ -350,8 +367,8 @@ public class GestionAlumnosView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JRadioButton jbEstado;
     private javax.swing.JButton jbGuardar;
