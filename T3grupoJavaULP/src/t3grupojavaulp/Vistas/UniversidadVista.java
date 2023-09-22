@@ -13,6 +13,7 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
 
     public UniversidadVista() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
