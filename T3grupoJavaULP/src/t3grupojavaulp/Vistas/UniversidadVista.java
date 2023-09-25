@@ -61,8 +61,12 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
+
+        jMenuBar2.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuBar2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuBar2.setPreferredSize(new java.awt.Dimension(317, 30));
 
         jMenu3.setText("Alumno");
 
