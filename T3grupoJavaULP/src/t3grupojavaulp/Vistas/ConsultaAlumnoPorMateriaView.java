@@ -26,9 +26,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         initComponents();
         rellenarComboBox();
         armarCabecera();
-        
-        
-       
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -146,7 +144,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
- cargarTabla();        // TODO add your handling code here:
+        cargarTabla();        // TODO add your handling code here:
     }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
 
 
@@ -165,6 +163,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Nota");
         jTable1.setModel(modelo);
     }
 
@@ -180,26 +179,18 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         for (Materia mat : listaMaterias) {
             jcbSeleccionMateria.addItem(mat);
         }
-        Materia materiaSeleccionada = (Materia) jcbSeleccionMateria.getSelectedItem();
-        int mS = materiaSeleccionada.getIdMateria();
-        InscripcionData inscData = new InscripcionData();
-        ArrayList<Alumno> alumnosMateria = inscData.obtenerAlumnosXMateria(mS);
-
-        for (Alumno al : alumnosMateria) {
-            modelo.addRow(new Object[]{al.getIdAlumno(), al.getDni(), al.getApellido(), al.getNombre()});
-
-        }
+        cargarTabla();
     }
 
     private void cargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // Limpio la tabla antes de cargar los datos
         Materia materiaSeleccionada = (Materia) jcbSeleccionMateria.getSelectedItem();
         int mS = materiaSeleccionada.getIdMateria();
         ArrayList<Alumno> listaAlumnos = inscData.obtenerAlumnosXMateria(mS);
 
         for (Alumno alumno : listaAlumnos) {
-            modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+            double nota = inscData.getNotaAlumnoMateria(alumno.getIdAlumno(), mS);
+            modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre(), nota});
         }
     }
 }

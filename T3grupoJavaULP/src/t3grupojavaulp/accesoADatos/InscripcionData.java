@@ -221,5 +221,25 @@ public class InscripcionData {
         return alumnos;
 
     }
-
+    
+    public double getNotaAlumnoMateria(int alID, int matID) {
+        double nota = 0;
+        String sql =    "SELECT nota FROM inscripcion " +
+                        "INNER JOIN materia ON inscripcion.idMateria = materia.idMateria " +
+                        "INNER JOIN alumno ON inscripcion.idAlumno = alumno.idAlumno " +
+                        "WHERE inscripcion.idAlumno = ? " +
+                        "AND inscripcion.idMateria = ? ";
+        try (PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1, alID);
+            ps.setInt(2, matID);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                nota = rs.getDouble("nota");
+            }
+        } catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla " + ex.getMessage(), "SQL ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return nota;
+    }
 }

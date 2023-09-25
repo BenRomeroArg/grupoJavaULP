@@ -17,7 +17,18 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
 
     public GestionMateriasView() {
         initComponents();
+        estadoInicial();
+    }
+    
+    /***
+     * Configuracion inicial de botones y campos de texto.
+     */
+    private void estadoInicial() {
+        clearFields();
         jtCodigo.setEditable(true);
+        jbNuevo.setEnabled(true);
+        jbEditar.setEnabled(true);
+        jbLimpiar.setEnabled(true);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
     }
@@ -32,9 +43,9 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
-        jbActualizar = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jtAnio = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
@@ -66,24 +77,24 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jPanel1.add(jbEliminar);
         jPanel1.add(filler1);
 
-        jbActualizar.setText("Editar");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+        jbEditar.setText("Editar");
+        jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
+                jbEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbActualizar);
+        jPanel1.add(jbEditar);
 
         jbGuardar.setText("Guardar");
         jPanel1.add(jbGuardar);
 
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbSalir);
+        jPanel1.add(jbLimpiar);
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +237,6 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
             clearFields();
 
         } catch (NumberFormatException ex) {
-
             JOptionPane.showMessageDialog(null, "Formulario incompleto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -234,8 +244,8 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        int codigo = Integer.parseInt(jtCodigo.getText());
         try {
+            int codigo = Integer.parseInt(jtCodigo.getText());
             Materia busqueda = matData.buscarMateria(codigo);
 
             jtNombre.setText(busqueda.getNombre());
@@ -245,23 +255,20 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
             jbGuardar.setEnabled(true);
             jbEliminar.setEnabled(true);
         } catch (NullPointerException ex) {
-            // JOptionPane.showMessageDialog(null, "No existe la materia", "ERROR", JOptionPane.ERROR_MESSAGE);
-
-            clearFields();
-            jbGuardar.setEnabled(false);
-            jbEliminar.setEnabled(false);
-            jbNuevo.setEnabled(true);
+            estadoInicial();
+        } catch (NumberFormatException ex) {
+            estadoInicial();
+            JOptionPane.showMessageDialog(null, "Debe ingresar un ID", "Missing ID", JOptionPane.WARNING_MESSAGE);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSalirActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        estadoInicial();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbActualizarActionPerformed
+    }//GEN-LAST:event_jbEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -274,13 +281,13 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JRadioButton jbEstado;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbNuevo;
-    private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtAnio;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
