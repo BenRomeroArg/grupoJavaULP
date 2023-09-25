@@ -63,8 +63,6 @@
             <Property name="text" type="java.lang.String" value="Materia"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMForMateria">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Formulario Materia"/>

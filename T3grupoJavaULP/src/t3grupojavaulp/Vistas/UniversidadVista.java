@@ -30,7 +30,6 @@ public class UniversidadVista extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jmForAlumno = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMForMateria = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jManejoInsc = new javax.swing.JMenuItem();
@@ -81,7 +80,6 @@ public class UniversidadVista extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Materia");
-        jMenu4.add(jSeparator1);
 
         jMForMateria.setText("Formulario Materia");
         jMForMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +256,6 @@ public class UniversidadVista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jOrdenarAlumnosMateria;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem jmForAlumno;
     // End of variables declaration//GEN-END:variables
 }
