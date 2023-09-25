@@ -23,6 +23,11 @@ public class Materia {
         this.activo = activo;
     }
 
+    public Materia(int idMateria, String nombre) {
+        this.idMateria = idMateria;
+        this.nombre = nombre;
+    }
+    
     public int getIdMateria() {
         return idMateria;
     }

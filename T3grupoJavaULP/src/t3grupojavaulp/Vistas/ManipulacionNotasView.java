@@ -5,17 +5,33 @@
  */
 package t3grupojavaulp.Vistas;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import t3grupojavaulp.Entidades.Alumno;
+import t3grupojavaulp.Entidades.Materia;
+import t3grupojavaulp.accesoADatos.AlumnoData;
+import t3grupojavaulp.accesoADatos.InscripcionData;
+
 /**
  *
  * @author HP
  */
 public class ManipulacionNotasView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ManipulacionNotasView
-     */
+    private AlumnoData aluData = new AlumnoData();
+    private InscripcionData inscData = new InscripcionData();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int x, int y) {
+            return (false); //Ninguna celda editable
+        }
+    };
+
     public ManipulacionNotasView() {
         initComponents();
+        rellenarComboBox();
+        armarCabecera();
     }
 
     /**
@@ -70,6 +86,11 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un alumno: ");
 
         jcAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcAlumnosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,9 +99,9 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jcAlumnos, 0, 158, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,9 +120,9 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 33, Short.MAX_VALUE)
+                        .addGap(0, 15, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 32, Short.MAX_VALUE))
+                        .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbGuardar)
@@ -134,7 +155,40 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    private void jcAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcAlumnosMouseClicked
+        try {
+           cargarTablaInscriptas();
+        } catch (ClassCastException e) {
+             JOptionPane.showMessageDialog(null, "El alumno no esta inscripto en ninguna materia", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jcAlumnosMouseClicked
+    private void rellenarComboBox() {
+        jcAlumnos.removeAllItems();
+        ArrayList<Alumno> aluList = aluData.listarAlumnos();
+        for (Alumno a : aluList) {
+            jcAlumnos.addItem(a.toString());
+        }
+    }
 
+    private void armarCabecera() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+        modelo.addColumn("Nota");
+        jtMaterias.setModel(modelo);
+    }
+    
+     private void cargarTablaInscriptas() {
+        modelo.setRowCount(0); //Vaciar tabla
+        Alumno alumnoSeleccionado = (Alumno) jcAlumnos.getSelectedItem();
+        ArrayList<Materia> listaMaterias = inscData.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
+
+        for (Materia m : listaMaterias) {
+            double nota = inscData.getNotaAlumnoMateria(alumnoSeleccionado.getIdAlumno(), m.getIdMateria());
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota});
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
