@@ -1,4 +1,4 @@
-/*package t3grupojavaulp;
+package t3grupojavaulp;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Inscripcion;
 import t3grupojavaulp.Entidades.Materia;
+import t3grupojavaulp.Vistas.UniversidadVista;
 import t3grupojavaulp.accesoADatos.AlumnoData;
 import t3grupojavaulp.accesoADatos.Conexion;
 import t3grupojavaulp.accesoADatos.InscripcionData;
@@ -16,6 +17,8 @@ public class T3grupoJavaULP {
 
     public static void main(String[] args) {
         Connection con = Conexion.conectar();
+        UniversidadVista app = new UniversidadVista();
+        app.setVisible(true);
 //        AlumnoData AD=new AlumnoData();
 //        MateriaData MD = new MateriaData();
 //        for(Alumno al: AD.listarAlumnos()){
@@ -32,7 +35,7 @@ public class T3grupoJavaULP {
         // Inscribir alumno a materia, buscando el idAlumno y idMateria
 //        AlumnoData alData = new AlumnoData();
 //        MateriaData matData = new MateriaData();
-        InscripcionData iData = new InscripcionData();
+//        InscripcionData iData = new InscripcionData();
 
 //        Alumno alBuscar = alData.buscarAlumno(8);
 //        Materia matBuscar = matData.buscarMateria(6);
@@ -57,8 +60,7 @@ public class T3grupoJavaULP {
 //        for (Materia i : iData.obtenerMateriasNOCursadas(3)) {
 //            System.out.println(i.toString());
 //        }
-        MateriaData mD= new MateriaData();
-        mD.listarMaterias();
+//        MateriaData mD= new MateriaData();
+//        mD.listarMaterias();
     }
 }
-*/
