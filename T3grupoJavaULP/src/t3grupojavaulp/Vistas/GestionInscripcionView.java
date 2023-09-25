@@ -6,6 +6,7 @@
 package t3grupojavaulp.Vistas;
 
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Materia;
@@ -17,6 +18,7 @@ import t3grupojavaulp.accesoADatos.InscripcionData;
  * @author HP
  */
 public class GestionInscripcionView extends javax.swing.JInternalFrame {
+    private ButtonGroup grupoRadio = new ButtonGroup();
     private AlumnoData aluData = new AlumnoData();
     private InscripcionData inscData = new InscripcionData();
     private DefaultTableModel modelo = new DefaultTableModel() {
@@ -33,6 +35,8 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         initComponents();
         rellenarComboBox();
         armarCabecera();
+        grupoRadio.add(jrbInscriptas);
+        grupoRadio.add(jrbNoInscriptas);
     }
 
     /**
@@ -191,7 +195,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
-        jrbNoInscriptas.setSelected(false);
+//        jrbNoInscriptas.setSelected(false);
         cargarTablaInscriptas();
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
@@ -204,7 +208,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
-        jrbInscriptas.setSelected(false);
+//        jrbInscriptas.setSelected(false);
         cargarTablaNoInscriptas();
     }//GEN-LAST:event_jrbNoInscriptasActionPerformed
 
