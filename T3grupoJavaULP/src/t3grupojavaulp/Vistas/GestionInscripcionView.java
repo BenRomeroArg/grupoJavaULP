@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 import t3grupojavaulp.Entidades.Alumno;
+import t3grupojavaulp.Entidades.Inscripcion;
 import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.accesoADatos.AlumnoData;
 import t3grupojavaulp.accesoADatos.InscripcionData;
+import t3grupojavaulp.accesoADatos.MateriaData;
 
 /**
  *
@@ -22,6 +24,10 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     private ButtonGroup grupoRadio = new ButtonGroup();
     private AlumnoData aluData = new AlumnoData();
     private InscripcionData inscData = new InscripcionData();
+    private MateriaData matData = new MateriaData();
+    private Materia materia;
+    private Alumno alumno;
+
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
@@ -203,7 +209,17 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        // TODO add your handling code here:
+        
+        int filaSeleccionada = jtTablaAlumnos.getSelectedRow();
+        int idMateria = (Integer) jtTablaAlumnos.getValueAt(filaSeleccionada, 0);
+        Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
+        materia = matData.buscarMateria(idMateria);
+
+      Inscripcion insc = new Inscripcion(alumno, materia);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
+
+       inscData.guardarInscripcion(insc);
+
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
