@@ -140,11 +140,11 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbSeleccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionMateriaActionPerformed
-        cargarTabla();        // TODO add your handling code here:
+        cargarTabla();
     }//GEN-LAST:event_jcbSeleccionMateriaActionPerformed
 
 
