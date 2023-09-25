@@ -1,8 +1,8 @@
-
 package t3grupojavaulp.Vistas;
 
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Inscripcion;
@@ -122,6 +122,11 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         });
 
         jbAnular.setText("Anular Inscripcion");
+        jbAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -205,15 +210,15 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        
+
         int filaSeleccionada = jtTablaAlumnos.getSelectedRow();
         int idMateria = (Integer) jtTablaAlumnos.getValueAt(filaSeleccionada, 0);
         Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
         materia = matData.buscarMateria(idMateria);
-
-      Inscripcion insc = new Inscripcion(alumno, materia);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
-
-       inscData.guardarInscripcion(insc);
+// Crear una instancia de Inscripcion con los datos
+        Inscripcion insc = new Inscripcion(alumno, materia);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
+//metodo para guardar
+        inscData.guardarInscripcion(insc);
 
 
     }//GEN-LAST:event_jbInscribirActionPerformed
@@ -223,7 +228,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
-//        jrbInscriptas.setSelected(false);
+
         jbAnular.setEnabled(false);
         jbInscribir.setEnabled(true);
         cargarTablaNoInscriptas();
@@ -238,6 +243,27 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
             cargarTablaNoInscriptas();
         }
     }//GEN-LAST:event_jcbAlumnosActionPerformed
+
+    private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
+
+        int filaSeleccionada = jtTablaAlumnos.getSelectedRow();
+        if (filaSeleccionada >= 0) { // Asegurarse de que se haya seleccionado una fila
+            int idMateria = (Integer) jtTablaAlumnos.getValueAt(filaSeleccionada, 0);
+            Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
+            materia = matData.buscarMateria(idMateria);
+
+            // Crear una instancia de Inscripcion con los datos
+            Inscripcion insc = new Inscripcion(alumno, materia);
+
+            // método para borrar la inscripción
+            inscData.borrarInscripcionMateriaAlumno(alumno.getIdAlumno(), materia.getIdMateria());
+
+            // Actualizar la tabla
+            cargarTablaInscriptas();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccioná una fila para anular una inscripción.");
+        }
+    }//GEN-LAST:event_jbAnularActionPerformed
 
     private void armarCabecera() {
         modelo.addColumn("ID");
