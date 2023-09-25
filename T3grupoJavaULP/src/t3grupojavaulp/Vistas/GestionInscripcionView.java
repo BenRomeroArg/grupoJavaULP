@@ -18,16 +18,17 @@ import t3grupojavaulp.accesoADatos.InscripcionData;
  * @author HP
  */
 public class GestionInscripcionView extends javax.swing.JInternalFrame {
+
     private ButtonGroup grupoRadio = new ButtonGroup();
     private AlumnoData aluData = new AlumnoData();
     private InscripcionData inscData = new InscripcionData();
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
-            return(false); //Ninguna celda editable
+            return (false); //Ninguna celda editable
         }
     };
-    
+
     /**
      * Creates new form GestionInscripcionView
      */
@@ -196,6 +197,8 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
 //        jrbNoInscriptas.setSelected(false);
+        jbInscribir.setEnabled(false);
+        jbAnular.setEnabled(true);
         cargarTablaInscriptas();
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
@@ -204,18 +207,22 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
 //        jrbInscriptas.setSelected(false);
+        jbAnular.setEnabled(false);
+        jbInscribir.setEnabled(true);
         cargarTablaNoInscriptas();
     }//GEN-LAST:event_jrbNoInscriptasActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         if (jrbInscriptas.isSelected()) {
+
             cargarTablaInscriptas();
         } else if (jrbNoInscriptas.isSelected()) {
+
             cargarTablaNoInscriptas();
         }
     }//GEN-LAST:event_jcbAlumnosActionPerformed
@@ -227,7 +234,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         modelo.addColumn("Nota");
         jtTablaAlumnos.setModel(modelo);
     }
-    
+
     private void rellenarComboBox() {
         jcbAlumnos.removeAllItems();
         ArrayList<Alumno> aluList = aluData.listarAlumnos();
@@ -235,28 +242,28 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
             jcbAlumnos.addItem(a);
         }
     }
-    
+
     private void cargarTablaInscriptas() {
         modelo.setRowCount(0); //Vaciar tabla
         Alumno alumnoSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
         ArrayList<Materia> listaMaterias = inscData.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
-        
+
         for (Materia m : listaMaterias) {
             double nota = inscData.getNotaAlumnoMateria(alumnoSeleccionado.getIdAlumno(), m.getIdMateria());
-            modelo.addRow(new Object[]{ m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota });
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota});
         }
     }
-    
+
     private void cargarTablaNoInscriptas() {
         modelo.setRowCount(0); //Vaciar tabla
         Alumno alumnoSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
         ArrayList<Materia> listaMaterias = inscData.obtenerMateriasNOCursadas(alumnoSeleccionado.getIdAlumno());
-        
+
         for (Materia m : listaMaterias) {
-            modelo.addRow(new Object[]{ m.getIdMateria(), m.getNombre(), m.getAnioMateria(), null });
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), null});
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
