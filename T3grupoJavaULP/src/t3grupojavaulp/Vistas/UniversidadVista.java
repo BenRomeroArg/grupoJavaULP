@@ -1,4 +1,3 @@
-
 package t3grupojavaulp.Vistas;
 
 import java.util.TreeSet;
@@ -9,7 +8,8 @@ import t3grupojavaulp.accesoADatos.InscripcionData;
  * @author nikan
  */
 public class UniversidadVista extends javax.swing.JFrame {
-public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
+
+    public static TreeSet<InscripcionData> listaAlumnos = new TreeSet();
 
     public UniversidadVista() {
         initComponents();
@@ -30,7 +30,6 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenu3 = new javax.swing.JMenu();
         jmForAlumno = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMForMateria = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jManejoInsc = new javax.swing.JMenuItem();
@@ -81,7 +80,6 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Materia");
-        jMenu4.add(jSeparator1);
 
         jMForMateria.setText("Formulario Materia");
         jMForMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +102,11 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
         jMenu5.add(jManejoInsc);
 
         jManipNotas.setText("Manipulación de notas");
+        jManipNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jManipNotasActionPerformed(evt);
+            }
+        });
         jMenu5.add(jManipNotas);
 
         jMenuBar2.add(jMenu5);
@@ -151,34 +154,34 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
     private void jmForAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmForAlumnoActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        GestionAlumnosView gav=new GestionAlumnosView();
+        GestionAlumnosView gav = new GestionAlumnosView();
         gav.setVisible(true);
         Escritorio.add(gav);
         Escritorio.moveToFront(gav);
     }//GEN-LAST:event_jmForAlumnoActionPerformed
 
     private void jManejoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscActionPerformed
-        Escritorio.removeAll();
+    //    Escritorio.removeAll();
         Escritorio.repaint();
-        GestionInscripcionView giv=new GestionInscripcionView();
+        GestionInscripcionView giv = new GestionInscripcionView();
         giv.setVisible(true);
         Escritorio.add(giv);
         Escritorio.moveToFront(giv);
     }//GEN-LAST:event_jManejoInscActionPerformed
 
     private void jMForMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMForMateriaActionPerformed
-        Escritorio.removeAll();
+    //    Escritorio.removeAll();
         Escritorio.repaint();
-        GestionMateriasView gmv=new GestionMateriasView();
+        GestionMateriasView gmv = new GestionMateriasView();
         gmv.setVisible(true);
         Escritorio.add(gmv);
         Escritorio.moveToFront(gmv);
     }//GEN-LAST:event_jMForMateriaActionPerformed
 
     private void jOrdenarAlumnosMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOrdenarAlumnosMateriaActionPerformed
-        Escritorio.removeAll();
+    //    Escritorio.removeAll();
         Escritorio.repaint();
-        ConsultaAlumnoPorMateriaView camV=new ConsultaAlumnoPorMateriaView();
+        ConsultaAlumnoPorMateriaView camV = new ConsultaAlumnoPorMateriaView();
         camV.setVisible(true);
         Escritorio.add(camV);
         Escritorio.moveToFront(camV);
@@ -187,6 +190,16 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jManipNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipNotasActionPerformed
+    //    Escritorio.removeAll();
+        Escritorio.repaint();
+        ManipulacionNotasView camV = new ManipulacionNotasView();
+        camV.setVisible(true);
+        Escritorio.add(camV);
+        Escritorio.moveToFront(camV);
+
+    }//GEN-LAST:event_jManipNotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +255,6 @@ public static TreeSet<InscripcionData> listaAlumnos= new TreeSet();
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jOrdenarAlumnosMateria;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem jmForAlumno;
     // End of variables declaration//GEN-END:variables
 }
