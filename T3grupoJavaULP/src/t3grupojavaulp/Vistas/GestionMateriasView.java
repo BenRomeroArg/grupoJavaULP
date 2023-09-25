@@ -1,8 +1,6 @@
 package t3grupojavaulp.Vistas;
 
-import java.sql.Date;
 import javax.swing.JOptionPane;
-import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.accesoADatos.MateriaData;
 
