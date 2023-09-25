@@ -27,10 +27,18 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         clearFields();
         jtCodigo.setEditable(true);
         jbNuevo.setEnabled(true);
-        jbEditar.setEnabled(true);
+        jbEditar.setEnabled(false);
         jbLimpiar.setEnabled(true);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
+        jbBuscar.setEnabled(true);
+        jtCodigo.setEditable(true);
+        jtCodigo.setEnabled(true);
+        jtNombre.setEditable(true);
+        jtNombre.setEnabled(true);
+        jtAnio.setEditable(true);
+        jtAnio.setEnabled(true);
+        jbEstado.setEnabled(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -217,7 +225,6 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtAnio.setText("");
         jbEstado.setSelected(false);
-
     }
 
     private void jbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadoActionPerformed
@@ -249,11 +256,17 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
             Materia busqueda = matData.buscarMateria(codigo);
 
             jtNombre.setText(busqueda.getNombre());
+            jtNombre.setEditable(false);
+            jtNombre.setEnabled(false);
             jtAnio.setText(busqueda.getAnioMateria() + "");
+            jtAnio.setEditable(false);
+            jtAnio.setEnabled(false);
             jbEstado.setSelected(busqueda.isActivo());
+            jbEstado.setEnabled(false);
             jbNuevo.setEnabled(false);
-            jbGuardar.setEnabled(true);
+            jbGuardar.setEnabled(false);
             jbEliminar.setEnabled(true);
+            jbEditar.setEnabled(true);
         } catch (NullPointerException ex) {
             estadoInicial();
         } catch (NumberFormatException ex) {
@@ -266,8 +279,16 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         estadoInicial();        // TODO add your handling code here:
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
+    /***
+     * Al clickear el boton editar, habilita la modificacion de los campos despues de una busqueda.
+     * @param evt 
+     */
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        // TODO add your handling code here:
+        jtNombre.setEditable(true);
+        jtNombre.setEnabled(true);
+        jtAnio.setEditable(true);
+        jtAnio.setEnabled(true);
+        jbGuardar.setEnabled(true);
     }//GEN-LAST:event_jbEditarActionPerformed
 
 
