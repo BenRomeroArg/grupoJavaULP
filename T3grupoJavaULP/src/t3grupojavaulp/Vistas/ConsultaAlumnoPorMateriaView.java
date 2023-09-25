@@ -167,12 +167,12 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         jTable1.setModel(modelo);
     }
 
-    private void borrarFilas() {
-        int f = jTable1.getRowCount() - 1;
-        for (; f >= 0; f--) {
-            modelo.removeRow(f);
-        }
-    }
+//    private void borrarFilas() {
+//        int f = jTable1.getRowCount() - 1;
+//        for (; f >= 0; f--) {
+//            modelo.removeRow(f);
+//        }
+//    }
 
     private void rellenarComboBox() {
         ArrayList<Materia> listaMaterias = matData.listarMaterias();

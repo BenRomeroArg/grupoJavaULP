@@ -97,8 +97,8 @@ public class Alumno {
     }
 
     @Override
-    public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
+    public java.lang.String toString() {
+        return nombre + " " + apellido + " DNI: " + dni;
     }
 
     @Override

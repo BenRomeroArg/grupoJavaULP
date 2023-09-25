@@ -5,7 +5,10 @@
  */
 package t3grupojavaulp.Vistas;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import t3grupojavaulp.Entidades.Alumno;
+import t3grupojavaulp.Entidades.Materia;
 import t3grupojavaulp.accesoADatos.AlumnoData;
 import t3grupojavaulp.accesoADatos.InscripcionData;
 
@@ -28,6 +31,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
      */
     public GestionInscripcionView() {
         initComponents();
+        rellenarComboBox();
         armarCabecera();
     }
 
@@ -42,7 +46,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcbAlumnos = new javax.swing.JComboBox<>();
+        jcbAlumnos = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jrbInscriptas = new javax.swing.JRadioButton();
         jrbNoInscriptas = new javax.swing.JRadioButton();
@@ -66,7 +70,12 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Seleccionar un alumno:");
 
-        jcbAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAlumnos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnosActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("  Listado de Materias");
@@ -79,6 +88,11 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         });
 
         jrbNoInscriptas.setText("Materias no Inscriptas");
+        jrbNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jtTablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,7 +191,8 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
-        // TODO add your handling code here:
+        jrbNoInscriptas.setSelected(false);
+        cargarTablaInscriptas();
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
@@ -188,15 +203,56 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
+        jrbInscriptas.setSelected(false);
+        cargarTablaNoInscriptas();
+    }//GEN-LAST:event_jrbNoInscriptasActionPerformed
+
+    private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
+        if (jrbInscriptas.isSelected()) {
+            cargarTablaInscriptas();
+        } else if (jrbNoInscriptas.isSelected()) {
+            cargarTablaNoInscriptas();
+        }
+    }//GEN-LAST:event_jcbAlumnosActionPerformed
 
     private void armarCabecera() {
         modelo.addColumn("ID");
-        modelo.addColumn("DNI");
-        modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Fecha Nacimiento");
+        modelo.addColumn("Año");
+        modelo.addColumn("Nota");
         jtTablaAlumnos.setModel(modelo);
     }
+    
+    private void rellenarComboBox() {
+        jcbAlumnos.removeAllItems();
+        ArrayList<Alumno> aluList = aluData.listarAlumnos();
+        for (Alumno a : aluList) {
+            jcbAlumnos.addItem(a);
+        }
+    }
+    
+    private void cargarTablaInscriptas() {
+        modelo.setRowCount(0); //Vaciar tabla
+        Alumno alumnoSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
+        ArrayList<Materia> listaMaterias = inscData.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
+        
+        for (Materia m : listaMaterias) {
+            double nota = inscData.getNotaAlumnoMateria(alumnoSeleccionado.getIdAlumno(), m.getIdMateria());
+            modelo.addRow(new Object[]{ m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota });
+        }
+    }
+    
+    private void cargarTablaNoInscriptas() {
+        modelo.setRowCount(0); //Vaciar tabla
+        Alumno alumnoSeleccionado = (Alumno) jcbAlumnos.getSelectedItem();
+        ArrayList<Materia> listaMaterias = inscData.obtenerMateriasNOCursadas(alumnoSeleccionado.getIdAlumno());
+        
+        for (Materia m : listaMaterias) {
+            modelo.addRow(new Object[]{ m.getIdMateria(), m.getNombre(), m.getAnioMateria(), null });
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -206,7 +262,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAnular;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbAlumnos;
+    private javax.swing.JComboBox jcbAlumnos;
     private javax.swing.JRadioButton jrbInscriptas;
     private javax.swing.JRadioButton jrbNoInscriptas;
     private javax.swing.JTable jtTablaAlumnos;
