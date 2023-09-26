@@ -270,7 +270,7 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        estadoInicial();        // TODO add your handling code here:
+        estadoInicial();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     /***

@@ -165,7 +165,7 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
         jTable1.setModel(modelo);
-        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false); //Inhabilita el movimiento de columnas
     }
 
     private void rellenarComboBox() {
