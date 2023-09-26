@@ -84,6 +84,11 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jPanel1.add(jbNuevo);
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jbEliminar);
         jPanel1.add(filler1);
 
@@ -290,6 +295,11 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Formato de año incorrecto: " + ex.getMessage(), "Error de formato", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        matData.eliminarMateria(Integer.parseInt(jtCodigo.getText()));
+        estadoInicial();
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
