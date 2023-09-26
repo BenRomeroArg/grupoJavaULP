@@ -1,17 +1,11 @@
 package t3grupojavaulp;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import t3grupojavaulp.Entidades.Alumno;
-import t3grupojavaulp.Entidades.Inscripcion;
-import t3grupojavaulp.Entidades.Materia;
+
 import t3grupojavaulp.Vistas.UniversidadVista;
-import t3grupojavaulp.accesoADatos.AlumnoData;
+
 import t3grupojavaulp.accesoADatos.Conexion;
-import t3grupojavaulp.accesoADatos.InscripcionData;
-import t3grupojavaulp.accesoADatos.MateriaData;
+
 
 public class T3grupoJavaULP {
 
@@ -19,6 +13,20 @@ public class T3grupoJavaULP {
         Connection con = Conexion.conectar();
         UniversidadVista app = new UniversidadVista();
         app.setVisible(true);
+
+    }
+}
+//////////////////LISTA DE PAQUETES IMPORTADOS///////////////////
+//import java.sql.Date;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import t3grupojavaulp.Entidades.Alumno;
+//import t3grupojavaulp.Entidades.Inscripcion;
+//import t3grupojavaulp.Entidades.Materia;
+//import t3grupojavaulp.accesoADatos.AlumnoData;
+//import t3grupojavaulp.accesoADatos.InscripcionData;
+//import t3grupojavaulp.accesoADatos.MateriaData;
+//////////////////PRUEBA DE METODOS/////////////////////////////
 //        AlumnoData AD=new AlumnoData();
 //        MateriaData MD = new MateriaData();
 //        for(Alumno al: AD.listarAlumnos()){
@@ -62,5 +70,3 @@ public class T3grupoJavaULP {
 //        }
 //        MateriaData mD= new MateriaData();
 //        mD.listarMaterias();
-    }
-}
