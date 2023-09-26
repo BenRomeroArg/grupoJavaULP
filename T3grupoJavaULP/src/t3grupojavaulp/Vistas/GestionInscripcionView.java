@@ -3,6 +3,7 @@ package t3grupojavaulp.Vistas;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import t3grupojavaulp.Entidades.Alumno;
 import t3grupojavaulp.Entidades.Inscripcion;
@@ -273,6 +274,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         modelo.addColumn("Nota");
         jtTablaAlumnos.setModel(modelo);
         jtTablaAlumnos.getTableHeader().setReorderingAllowed(false);
+        jtTablaAlumnos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     private void rellenarComboBox() {
