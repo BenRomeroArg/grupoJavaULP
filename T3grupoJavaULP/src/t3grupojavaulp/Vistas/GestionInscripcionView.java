@@ -219,8 +219,9 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         Inscripcion insc = new Inscripcion(alumno, materia, -1);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
 //metodo para guardar
         inscData.guardarInscripcion(insc);
-
-
+        
+        //Actualizar tabla
+        cargarTablaNoInscriptas();
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
