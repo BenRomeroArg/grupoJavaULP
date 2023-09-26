@@ -294,6 +294,7 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Formato de año incorrecto: " + ex.getMessage(), "Error de formato", JOptionPane.WARNING_MESSAGE);
         }
+        estadoInicial();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
