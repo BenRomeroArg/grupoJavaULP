@@ -27,7 +27,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
-            return (false); //Ninguna celda editable
+            return false; //Ninguna celda editable
         }
     };
 
