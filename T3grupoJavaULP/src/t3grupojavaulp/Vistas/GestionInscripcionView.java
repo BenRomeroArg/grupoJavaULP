@@ -70,6 +70,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(406, 350));
+        setPreferredSize(new java.awt.Dimension(489, 467));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

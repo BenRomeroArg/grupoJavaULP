@@ -51,6 +51,7 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(380, 420));
+        setPreferredSize(new java.awt.Dimension(489, 449));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
