@@ -185,9 +185,9 @@ public class InscripcionData {
             ps.setInt(3, idMateria);
             int filas = ps.executeUpdate();
 
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota actualizada!");
-            }
+            //if (filas > 0) {
+            //    JOptionPane.showMessageDialog(null, "Nota actualizada!");
+            //}
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error SQL!");
