@@ -272,6 +272,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         modelo.addColumn("Año");
         modelo.addColumn("Nota");
         jtTablaAlumnos.setModel(modelo);
+        jtTablaAlumnos.getTableHeader().setReorderingAllowed(false);
     }
 
     private void rellenarComboBox() {
