@@ -5,13 +5,17 @@
  */
 package t3grupojavaulp.Vistas;
 
+import com.sun.tools.javac.tree.JCTree;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import t3grupojavaulp.Entidades.Alumno;
-import t3grupojavaulp.Entidades.Materia;
+import t3grupojavaulp.Entidades.Inscripcion;
 import t3grupojavaulp.accesoADatos.AlumnoData;
 import t3grupojavaulp.accesoADatos.InscripcionData;
+import t3grupojavaulp.accesoADatos.MateriaData;
 
 /**
  *
@@ -20,11 +24,12 @@ import t3grupojavaulp.accesoADatos.InscripcionData;
 public class ManipulacionNotasView extends javax.swing.JInternalFrame {
 
     private AlumnoData aluData = new AlumnoData();
+    private MateriaData matData = new MateriaData();
     private InscripcionData inscData = new InscripcionData();
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
-            return (false); //Ninguna celda editable
+            return y == 3; //Ninguna celda editable
         }
     };
 
@@ -50,7 +55,7 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jcAlumnos = new javax.swing.JComboBox<>();
+        jcAlumnos = new javax.swing.JComboBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -82,13 +87,18 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Seleccione un alumno: ");
 
-        jcAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jcAlumnosMouseClicked(evt);
+        jcAlumnos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcAlumnosActionPerformed(evt);
             }
         });
 
@@ -152,40 +162,58 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
+        int aluId = ((Alumno) jcAlumnos.getSelectedItem()).getIdAlumno();
+        
+        // Extraemos las inscripciones de la tabla.
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            try {
+                int idMateria = (int) modelo.getValueAt(i, 0);
+                double nota = Double.parseDouble(modelo.getValueAt(i, 3).toString());
+                inscData.actualizarNota(aluId, idMateria, nota);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Formato de nota incorrecto: "+ex.getMessage(), "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jcAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcAlumnosMouseClicked
-        try {
-           cargarTablaInscriptas();
-        } catch (ClassCastException e) {
-             JOptionPane.showMessageDialog(null, "El alumno no esta inscripto en ninguna materia", "ERROR", JOptionPane.ERROR_MESSAGE);
+    private void jcAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcAlumnosActionPerformed
+        if (jcAlumnos.getSelectedItem() != null) {
+            cargarTablaInscriptas();
         }
-    }//GEN-LAST:event_jcAlumnosMouseClicked
+    }//GEN-LAST:event_jcAlumnosActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+    
     private void rellenarComboBox() {
         jcAlumnos.removeAllItems();
         ArrayList<Alumno> aluList = aluData.listarAlumnos();
         for (Alumno a : aluList) {
-            jcAlumnos.addItem(a.toString());
+            jcAlumnos.addItem(a);
         }
     }
 
     private void armarCabecera() {
-        modelo.addColumn("Codigo");
+        modelo.addColumn("Codigo Materia");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         modelo.addColumn("Nota");
+        modelo.addColumn("Codigo Inscripción");
         jtMaterias.setModel(modelo);
     }
     
      private void cargarTablaInscriptas() {
         modelo.setRowCount(0); //Vaciar tabla
         Alumno alumnoSeleccionado = (Alumno) jcAlumnos.getSelectedItem();
-        ArrayList<Materia> listaMaterias = inscData.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
+        ArrayList<Inscripcion> inscripciones = inscData.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno());
 
-        for (Materia m : listaMaterias) {
-            double nota = inscData.getNotaAlumnoMateria(alumnoSeleccionado.getIdAlumno(), m.getIdMateria());
-            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota});
+        for (Inscripcion i : inscripciones) {
+            try {
+                modelo.addRow(new Object[]{i.getMateria().getIdMateria(), i.getMateria().getNombre(), i.getMateria().getAnioMateria(), i.getNota(), i.getIdInscripcion()});
+            } catch (Exception ex) {
+                continue; // La materia fue eliminada de la base de datos, asi que la ignoramos.
+            }
         }
     }
     
@@ -196,7 +224,7 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcAlumnos;
+    private javax.swing.JComboBox jcAlumnos;
     private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
 }

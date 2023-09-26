@@ -179,7 +179,6 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         for (Materia mat : listaMaterias) {
             jcbSeleccionMateria.addItem(mat);
         }
-        cargarTabla();
     }
 
     private void cargarTabla() {
