@@ -257,19 +257,21 @@ public class UniversidadVista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public void confirmarSalida(){
         int valor=JOptionPane.showConfirmDialog(this, "¿Está seguro que desea abandonar la aplicación?", 
-        /**/                                    "ADVERTENCIA", JOptionPane.YES_NO_OPTION);
+        /**/                                    "ADVERTENCIA", JOptionPane.YES_NO_OPTION); //YES=0 NO=1
+        //                                      this. se refiere a la ventana padre ara el cuadro de diálogo
         if(valor==JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(this,"Nos vemos en la próxima consulta","Adiós",JOptionPane.CLOSED_OPTION);
             System.exit(0);
         }
     }
     public void cerrar(){
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e){
-                confirmarSalida();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//Configura que hace la X de la ventana (personaliza la X)
+        addWindowListener(new WindowAdapter(){ //WindowListener escucha eventos relacionados con la ventana
+            //                                   WindowAdapter proporciona una implementación vacía para todos los métodos de la interfaz
+            public void windowClosing(WindowEvent e){ //se anula el método WindowClosing de WindowAdapter
+                confirmarSalida();                    //código para confirmar la salida
             }
          });
-        this.setVisible(true);
+        this.setVisible(true); //Establece la visibilidad de la ventana
     }
 }
