@@ -193,8 +193,8 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         modelo.addColumn("Nota");
         modelo.addColumn("Codigo Inscripción");
         jtMaterias.setModel(modelo);
-        jtMaterias.removeColumn(jtMaterias.getColumnModel().getColumn(4)); // Oucltar columna del codigo de inscripcion.
-        jtMaterias.getTableHeader().setReorderingAllowed(false);
+        jtMaterias.removeColumn(jtMaterias.getColumnModel().getColumn(4)); // Ocultar columna del codigo de inscripcion.
+        jtMaterias.getTableHeader().setReorderingAllowed(false); //Inhabilita movimiento de columnas.
     }
     
      private void cargarTablaInscriptas() {
