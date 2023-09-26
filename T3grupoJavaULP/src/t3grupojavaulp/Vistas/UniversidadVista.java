@@ -1,6 +1,10 @@
 package t3grupojavaulp.Vistas;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.TreeSet;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import t3grupojavaulp.accesoADatos.InscripcionData;
 
 /**
@@ -14,6 +18,7 @@ public class UniversidadVista extends javax.swing.JFrame {
     public UniversidadVista() {
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,8 +41,7 @@ public class UniversidadVista extends javax.swing.JFrame {
         jManipNotas = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jOrdenarAlumnosMateria = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmSalir = new javax.swing.JMenu();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -50,7 +54,6 @@ public class UniversidadVista extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(612, 557));
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
@@ -123,17 +126,13 @@ public class UniversidadVista extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu6);
 
-        jMenu7.setText("Salir");
-
-        jMenuItem3.setText("Salir del sistema");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+        jmSalir.setText("Salir");
+        jmSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmSalirMouseClicked(evt);
             }
         });
-        jMenu7.add(jMenuItem3);
-
-        jMenuBar2.add(jMenu7);
+        jMenuBar2.add(jmSalir);
 
         setJMenuBar(jMenuBar2);
 
@@ -187,10 +186,6 @@ public class UniversidadVista extends javax.swing.JFrame {
         Escritorio.moveToFront(camV);
     }//GEN-LAST:event_jOrdenarAlumnosMateriaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jManipNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipNotasActionPerformed
     //    Escritorio.removeAll();
         Escritorio.repaint();
@@ -200,6 +195,10 @@ public class UniversidadVista extends javax.swing.JFrame {
         Escritorio.moveToFront(camV);
 
     }//GEN-LAST:event_jManipNotasActionPerformed
+
+    private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
+        confirmarSalida();
+    }//GEN-LAST:event_jmSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -248,13 +247,29 @@ public class UniversidadVista extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jOrdenarAlumnosMateria;
     private javax.swing.JMenuItem jmForAlumno;
+    private javax.swing.JMenu jmSalir;
     // End of variables declaration//GEN-END:variables
+    public void confirmarSalida(){
+        int valor=JOptionPane.showConfirmDialog(this, "¿Está seguro que desea abandonar la aplicación?", 
+        /**/                                    "ADVERTENCIA", JOptionPane.YES_NO_OPTION);
+        if(valor==JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(this,"Nos vemos en la próxima consulta","Adiós",JOptionPane.CLOSED_OPTION);
+            System.exit(0);
+        }
+    }
+    public void cerrar(){
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                confirmarSalida();
+            }
+         });
+        this.setVisible(true);
+    }
 }
