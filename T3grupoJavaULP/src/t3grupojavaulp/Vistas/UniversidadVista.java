@@ -160,7 +160,7 @@ public class UniversidadVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jmForAlumnoActionPerformed
 
     private void jManejoInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscActionPerformed
-    //    Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         GestionInscripcionView giv = new GestionInscripcionView();
         giv.setVisible(true);
@@ -169,7 +169,7 @@ public class UniversidadVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jManejoInscActionPerformed
 
     private void jMForMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMForMateriaActionPerformed
-    //    Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         GestionMateriasView gmv = new GestionMateriasView();
         gmv.setVisible(true);
@@ -178,7 +178,7 @@ public class UniversidadVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jMForMateriaActionPerformed
 
     private void jOrdenarAlumnosMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOrdenarAlumnosMateriaActionPerformed
-    //    Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         ConsultaAlumnoPorMateriaView camV = new ConsultaAlumnoPorMateriaView();
         camV.setVisible(true);
@@ -187,7 +187,7 @@ public class UniversidadVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jOrdenarAlumnosMateriaActionPerformed
 
     private void jManipNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipNotasActionPerformed
-    //    Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         ManipulacionNotasView camV = new ManipulacionNotasView();
         camV.setVisible(true);
