@@ -160,10 +160,12 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
                 int idMateria = (int) modelo.getValueAt(i, 0);
                 double nota = Double.parseDouble(modelo.getValueAt(i, 3).toString());
                 inscData.actualizarNota(aluId, idMateria, nota);
+                
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Formato de nota incorrecto: "+ex.getMessage(), "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
             }
         }
+        JOptionPane.showMessageDialog(null, "Nota actualizada!");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jcAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcAlumnosActionPerformed
