@@ -216,7 +216,7 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
         materia = matData.buscarMateria(idMateria);
 // Crear una instancia de Inscripcion con los datos
-        Inscripcion insc = new Inscripcion(alumno, materia);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
+        Inscripcion insc = new Inscripcion(alumno, materia, -1);  //VER PARA QUE LO CARGUE COMO NULL Y NO CERO . por ej un IF si es cero ponga NULL
 //metodo para guardar
         inscData.guardarInscripcion(insc);
 
@@ -288,7 +288,13 @@ public class GestionInscripcionView extends javax.swing.JInternalFrame {
 
         for (Materia m : listaMaterias) {
             double nota = inscData.getNotaAlumnoMateria(alumnoSeleccionado.getIdAlumno(), m.getIdMateria());
-            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota});
+            Object[] row;
+            if (nota != -1) {
+                row = new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), nota};
+            } else {
+                row = new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria(), null};
+            }
+            modelo.addRow(row);
         }
     }
 

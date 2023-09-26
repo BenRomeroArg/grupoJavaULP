@@ -37,6 +37,7 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
         initComponents();
         rellenarComboBox();
         armarCabecera();
+        cargarTablaInscriptas();
     }
 
     /**
@@ -210,7 +211,14 @@ public class ManipulacionNotasView extends javax.swing.JInternalFrame {
 
         for (Inscripcion i : inscripciones) {
             try {
-                modelo.addRow(new Object[]{i.getMateria().getIdMateria(), i.getMateria().getNombre(), i.getMateria().getAnioMateria(), i.getNota(), i.getIdInscripcion()});
+                double nota = i.getNota();
+                Object[] row;
+                if (nota != -1) {
+                    row = new Object[]{i.getMateria().getIdMateria(), i.getMateria().getNombre(), i.getMateria().getAnioMateria(), nota, i.getIdInscripcion()};
+                } else {
+                    row = new Object[]{i.getMateria().getIdMateria(), i.getMateria().getNombre(), i.getMateria().getAnioMateria(), null, i.getIdInscripcion()};
+                }
+                modelo.addRow(row);
             } catch (Exception ex) {
                 continue; // La materia fue eliminada de la base de datos, asi que la ignoramos.
             }

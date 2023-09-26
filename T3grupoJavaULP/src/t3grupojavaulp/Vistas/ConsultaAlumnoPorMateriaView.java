@@ -167,13 +167,6 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
         jTable1.setModel(modelo);
     }
 
-//    private void borrarFilas() {
-//        int f = jTable1.getRowCount() - 1;
-//        for (; f >= 0; f--) {
-//            modelo.removeRow(f);
-//        }
-//    }
-
     private void rellenarComboBox() {
         ArrayList<Materia> listaMaterias = matData.listarMaterias();
         for (Materia mat : listaMaterias) {
@@ -189,7 +182,13 @@ public class ConsultaAlumnoPorMateriaView extends javax.swing.JInternalFrame {
 
         for (Alumno alumno : listaAlumnos) {
             double nota = inscData.getNotaAlumnoMateria(alumno.getIdAlumno(), mS);
-            modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre(), nota});
+            Object[] row;
+            if (nota != -1) {
+                row = new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre(), nota};
+            } else {
+                row = new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre(), null};
+            }
+            modelo.addRow(row);
         }
     }
 }

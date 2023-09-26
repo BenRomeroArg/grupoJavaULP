@@ -96,6 +96,11 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jPanel1.add(jbEditar);
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jbGuardar);
 
         jbLimpiar.setText("Limpiar");
@@ -115,12 +120,6 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("Estado");
-
-        jbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEstadoActionPerformed(evt);
-            }
-        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Año");
@@ -221,10 +220,6 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
         jbEstado.setSelected(false);
     }
 
-    private void jbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbEstadoActionPerformed
-
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         //AGREGAR MATERIA NUEVA
         try {
@@ -278,12 +273,23 @@ public class GestionMateriasView extends javax.swing.JInternalFrame {
      * @param evt 
      */
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
+        jtCodigo.setEnabled(false);
+        jtCodigo.setEditable(false);
         jtNombre.setEditable(true);
         jtNombre.setEnabled(true);
         jtAnio.setEditable(true);
         jtAnio.setEnabled(true);
         jbGuardar.setEnabled(true);
     }//GEN-LAST:event_jbEditarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try {
+            Materia mat = new Materia(Integer.parseInt(jtCodigo.getText()), jtNombre.getText(), Integer.parseInt(jtAnio.getText()), true);
+            matData.modificarMateria(mat);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Formato de año incorrecto: " + ex.getMessage(), "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
