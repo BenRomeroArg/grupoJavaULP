@@ -89,7 +89,7 @@ public class InscripcionData {
         String sql = "SELECT i.* FROM inscripcion AS i "
                 + "INNER JOIN alumno AS a ON a.idAlumno = i.idAlumno "
                 + "INNER JOIN materia AS m ON m.idMateria = i.idMateria "
-                + "WHERE a.idAlumno = ? AND a.estado = 1;";
+                + "WHERE a.idAlumno = ? AND a.estado = 1 AND m.estado = 1;";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -137,7 +137,7 @@ public class InscripcionData {
         ArrayList<Materia> materias = new ArrayList<>();
         try {
             String sql = "SELECT * FROM materia "
-                    + "WHERE idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+                    + "WHERE idMateria NOT IN (SELECT inscripcion.idMateria FROM inscripcion WHERE idAlumno = ?) AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
